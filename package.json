@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "build": "tsc src/main.ts",
-    "run": "yarn build && node src/main.js"
+    "run": "./src/main.js",
+    "pages": "bash -c \"rm -rf pages && mkdir -p pages && (cd examples/elm2 && yarn build) && cp -rp examples/elm2/build pages/elm\"",
+    "serve": "bash -c \"yarn pages && yarn _serve\"",
+    "_serve": "serve pages"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.175",
