@@ -9,9 +9,11 @@ async function main() {
     const paths = [process.argv[2]]
     const resources: Parser.Resource[] = await Promise.all(paths.map(Parser.parseResource))
     // console.log(resources)
-    resources.flat().map(r => {
+    resources.flat().map(async r => {
         // r.messages.map(m => console.log(m))
-        console.log(Elm(r.messages))
+        const out: string = await Elm(r.messages)
+        // console.log(out)
+        process.stdout.write(out)
     })
 }
 main()

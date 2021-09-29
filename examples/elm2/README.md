@@ -1,3 +1,16 @@
+# fluent-typesafe Elm example
+
+Steps:
+
+* Add `fluent-typesafe` to your build - see `package.json`'s `scripts` section.
+* Add `gen` to `elm.json`'s `source-directories`.
+* Add `gen` to your `.gitignore` file.
+  * Codegen results are committed to this example so you can more easily peek at `fluent-typesafe`'s generated files - but in general, codegen results shouldn't be committed to git. Do as I say, not as I do.
+* Expose your `.ftl` files on your webserver as static files. For `create-elm-app`, that means moving them to the `public` directory.
+* Add the required `meta` tags to your html - see the example's `index.html`.
+* Add `import '@fluent/web'` and, if necessary, `import 'regenerator-runtime'`, to your `index.js`.
+
+
 # Elm App
 
 This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).

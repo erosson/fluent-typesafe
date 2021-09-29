@@ -2,13 +2,15 @@
     "scripts": {
         "dev": "bash -c \"mkdir -p gen && ../../src/main.ts ./public/localization/en-US/main.ftl > ./gen/Localization.elm\"",
         "start": "bash -c \"yarn dev && elm-app start\"",
-        "build": "bash -c \"yarn dev && elm-app build\""
+        "build": "bash -c \"yarn dev && elm-app build\"",
+        "test": "bash -c \"yarn dev && elm make gen/* && elm-format --validate gen/\""
     },
     "dependencies": {
         "@fluent/web": "^0.2.1",
         "regenerator-runtime": "^0.13.9"
     },
     "devDependencies": {
-        "create-elm-app": "^5.22.0"
+        "create-elm-app": "^5.22.0",
+        "elm-format": "^0.8.5"
     }
 }

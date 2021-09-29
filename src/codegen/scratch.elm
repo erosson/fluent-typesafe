@@ -1,4 +1,5 @@
--- an unused Elm file, for syntax highlighting while editing the `elm.ts` template.
+{-| an unused Elm file, for syntax highlighting while editing the `elm.ts` template.
+-}
 
 
 module Localization exposing (hello, withArgs)
