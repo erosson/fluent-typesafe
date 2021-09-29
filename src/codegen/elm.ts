@@ -16,9 +16,9 @@ function gen(messages: Message[]): Promise<string> {
         if (!proc?.stdin) {
             return reject('failed to spawn elm-format')
         }
-        const stdin = proc.stdin // make typescript happy
         const input = genRaw(messages)
-        console.error(input)
+        // console.error(input)
+        const stdin = proc.stdin // make typescript happy
         stdin.write(input, () => {
             stdin.end()
         })

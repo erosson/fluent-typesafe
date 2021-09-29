@@ -1,8 +1,5 @@
-#!/usr/bin/env ts-node-script
 import * as Parser from './parser'
-import Path from 'path'
 import Elm from './codegen/elm'
-import { startCase } from 'lodash'
 
 async function main() {
     // const paths = ['ftl/localization/en-US/main.ftl']

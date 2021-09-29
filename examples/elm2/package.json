@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "dev": "bash -c \"mkdir -p gen && ../../src/main.ts ./public/localization/en-US/main.ftl > ./gen/Localization.elm\"",
+        "dev": "bash -c \"mkdir -p gen && ../../bin/fluent-typesafe.ts ./public/localization/en-US/main.ftl > ./gen/Localization.elm\"",
         "start": "bash -c \"yarn dev && elm-app start\"",
         "build": "bash -c \"yarn dev && elm-app build\"",
         "test": "bash -c \"yarn dev && elm make gen/* && elm-format --validate gen/\""
