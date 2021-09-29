@@ -19,7 +19,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev": "bash -c \"mkdir -p src/gen && cd ../.. && ./bin/fluent-typesafe.ts --format=react ./examples/react-dom/public/localization/en-US/main.ftl > ./examples/react-dom/src/gen/localization.tsx\"",
+    "dev": "bash -c \"mkdir -p src/gen && cd ../.. && ./bin/fluent-typesafe.ts --format=react-dom ./examples/react-dom/public/localization/en-US/main.ftl > ./examples/react-dom/src/gen/localization.tsx\"",
     "start": "yarn dev && react-scripts start",
     "build": "yarn dev && react-scripts build",
     "test": "yarn dev && react-scripts test",
