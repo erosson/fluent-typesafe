@@ -1,19 +1,20 @@
 import * as Parser from './parser'
-import Elm from './codegen/elm'
+import ElmFormat from './codegen/elm'
+import ReactFormat from './codegen/react'
 import Minimist from 'minimist'
 
-const usage = `usage: \`fluent-typesafe --format=[elm|ts] FTL_PATH\``
-type Format = 'elm' | 'ts'
+const usage = `usage: \`fluent-typesafe --format=[elm|react] FTL_PATH\``
+type Format = 'elm' | 'react'
 async function run(format: Format, r: Parser.Resource): Promise<string> {
     switch (format) {
-        case 'elm': return Elm(r.messages)
-        case 'ts': throw new Error('TODO')
+        case 'elm': return ElmFormat(r.messages)
+        case 'react': return ReactFormat(r.messages)
     }
 }
 function parseFormat(args: Minimist.ParsedArgs) {
     switch (args.format) {
         case 'elm': return 'elm'
-        case 'ts': return 'ts'
+        case 'react': return 'react'
         default: throw new Error(usage)
     }
 }

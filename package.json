@@ -3,7 +3,7 @@
     "fluent-typesafe": "./bin/fluent-typesafe.ts"
   },
   "scripts": {
-    "pages": "bash -c \"rm -rf pages && mkdir -p pages && (cd examples/elm2 && yarn && yarn build) && cp -rp examples/elm2/build pages/elm\"",
+    "pages": "bash -c \"rm -rf pages && mkdir -p pages && (cd examples/elm2 && yarn && yarn build) && cp -rp examples/elm2/build pages/elm && (cd examples/react-dom && yarn && yarn build) && cp -rp examples/react-dom/build pages/react-dom\"",
     "serve": "bash -c \"yarn pages && yarn _serve\"",
     "_serve": "serve pages",
     "tests": "./tests/examples.sh"
@@ -18,7 +18,8 @@
   "dependencies": {
     "@fluent/syntax": "^0.18.0",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "prettier": "^2.4.1"
   },
   "optionalDependencies": {
     "elm-format": "^0.8.5"
