@@ -1,4 +1,7 @@
 {
+  "name": "fluent-typesafe",
+  "version": "0.0.1",
+  "license": "MIT",
   "bin": {
     "fluent-typesafe": "./bin/fluent-typesafe.ts"
   },
