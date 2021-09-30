@@ -1,5 +1,5 @@
 import * as Syntax from '@fluent/syntax'
-import * as fs from 'fs/promises'
+import { promises as fs } from 'fs'
 import { uniqBy } from 'lodash'
 
 export type Resource = {

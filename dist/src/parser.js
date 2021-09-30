@@ -66,7 +66,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 exports.__esModule = true;
 exports.parseResource = exports.VarType = void 0;
 var Syntax = __importStar(require("@fluent/syntax"));
-var fs = __importStar(require("fs/promises"));
+var fs_1 = require("fs");
 var lodash_1 = require("lodash");
 var VarType;
 (function (VarType) {
@@ -123,7 +123,7 @@ function parseResource(path) {
         var raw;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fs.readFile(path, 'utf8')];
+                case 0: return [4 /*yield*/, fs_1.promises.readFile(path, 'utf8')];
                 case 1:
                     raw = _a.sent();
                     return [2 /*return*/, parseResource_(path, raw)];
