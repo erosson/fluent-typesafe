@@ -3,7 +3,7 @@ set -euo pipefail
 
 rm -rf pages
 mkdir -p pages
-cp ./src/pages.html ./pages/index.html
+cp ./examples/index.html ./pages
 
 (cd examples/elm2 && yarn && yarn build)
 cp -rp examples/elm2/build pages/elm
