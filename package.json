@@ -2,15 +2,11 @@
   "name": "fluent-typesafe",
   "version": "0.0.1",
   "license": "MIT",
-  "type": "module",
   "bin": {
-    "fluent-typesafe": "./bin/fluent-typesafe.ts"
+    "fluent-typesafe": "./dist/bin/fluent-typesafe.js"
   },
   "scripts": {
-    "pages": "bash ./src/pages.sh",
-    "serve": "bash -c \"yarn pages && yarn _serve\"",
-    "_serve": "serve pages",
-    "tests": "./tests/examples.sh"
+    "build": "tsc --esModuleInterop --outDir ./dist ./bin/fluent-typesafe.ts"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.175",
