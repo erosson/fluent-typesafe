@@ -2,6 +2,7 @@
   "name": "fluent-typesafe",
   "version": "0.0.1",
   "license": "MIT",
+  "type": "module",
   "bin": {
     "fluent-typesafe": "./bin/fluent-typesafe.ts"
   },
