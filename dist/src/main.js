@@ -58,23 +58,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
+var minimist_1 = __importDefault(require("minimist"));
+var fs_1 = require("fs");
+var glob_1 = __importDefault(require("glob"));
+var util_1 = require("util");
+var path_1 = __importDefault(require("path"));
 var Parser = __importStar(require("./parser"));
 var elm_1 = __importDefault(require("./codegen/elm"));
 var react_1 = __importDefault(require("./codegen/react"));
 var react_dom_1 = __importDefault(require("./codegen/react-dom"));
-var minimist_1 = __importDefault(require("minimist"));
-var usage = "usage: `fluent-typesafe --format=[elm|react|react-dom] FTL_PATH`";
-function run(format, r) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (format) {
-                case 'elm': return [2 /*return*/, (0, elm_1["default"])(r.messages)];
-                case 'react': return [2 /*return*/, (0, react_1["default"])(r.messages)];
-                case 'react-dom': return [2 /*return*/, (0, react_dom_1["default"])(r.messages)];
-            }
-            return [2 /*return*/];
-        });
-    });
+var usage = "usage: `fluent-typesafe [--dry-run] --format=[elm|react|react-dom] --out=OUTPUT_DIRECTORY FTL_DIRECTORY`";
+function parse(args) {
+    var inputDir = args._[0];
+    var outputDir = args['out'];
+    var dryRun = args['dry-run'];
+    if (!inputDir || !outputDir) {
+        throw new Error(usage);
+    }
+    return { format: parseFormat(args), inputDir: inputDir, outputDir: outputDir, dryRun: dryRun };
 }
 function parseFormat(args) {
     switch (args.format) {
@@ -84,38 +85,52 @@ function parseFormat(args) {
         default: throw new Error(usage);
     }
 }
-function main() {
-    return __awaiter(this, void 0, void 0, function () {
-        var args, paths, format, resources;
-        var _this = this;
+function runnerFormat(format) {
+    switch (format) {
+        case 'elm': return elm_1["default"];
+        case 'react': return react_1["default"];
+        case 'react-dom': return react_dom_1["default"];
+    }
+}
+function write(args) {
+    var _this = this;
+    return function (path, data) { return __awaiter(_this, void 0, void 0, function () {
+        var fullpath;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    args = (0, minimist_1["default"])(process.argv.slice(2), { string: ['format'] });
-                    paths = [args._[0]];
-                    format = parseFormat(args);
-                    return [4 /*yield*/, Promise.all(paths.map(Parser.parseResource))
-                        // console.error(resources)
-                    ];
+                    fullpath = path_1["default"].resolve(path_1["default"].join(args.outputDir, path));
+                    if (!args.dryRun) return [3 /*break*/, 1];
+                    console.log('(fake) write', fullpath, data.length);
+                    return [3 /*break*/, 3];
                 case 1:
-                    resources = _a.sent();
-                    // console.error(resources)
-                    resources.flat().map(function (r) { return __awaiter(_this, void 0, void 0, function () {
-                        var out;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, run(format, r)
-                                    // console.log(out)
-                                ];
-                                case 1:
-                                    out = _a.sent();
-                                    // console.log(out)
-                                    process.stdout.write(out);
-                                    return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                    return [2 /*return*/];
+                    console.log('write', fullpath, data.length);
+                    return [4 /*yield*/, fs_1.promises.mkdir(path_1["default"].parse(fullpath).dir, { recursive: true })];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/, fs_1.promises.writeFile(fullpath, data)];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); };
+}
+function main() {
+    return __awaiter(this, void 0, void 0, function () {
+        var args, inputs, resources, runner;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    args = parse((0, minimist_1["default"])(process.argv.slice(2), { string: ['format', 'out'], boolean: ['dry-run'] }));
+                    return [4 /*yield*/, (0, util_1.promisify)(glob_1["default"])('**/*.ftl', { cwd: args.inputDir })];
+                case 1:
+                    inputs = _a.sent();
+                    if (args.dryRun) {
+                        console.log(args, inputs);
+                    }
+                    resources = inputs.map(function (p) { return [p, Parser.parseResource(path_1["default"].join(args.inputDir, p))]; });
+                    runner = runnerFormat(args.format);
+                    return [4 /*yield*/, runner(resources, write(args))];
+                case 2: return [2 /*return*/, _a.sent()];
             }
         });
     });
