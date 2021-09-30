@@ -34,7 +34,7 @@ import * as __L from '@fluent/react'
 
 // https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
 // TODO: typesafe \`attrs\` too
-type __props = Omit<__L.LocalizedProps, 'id' | 'vars'>
+type __props = Omit<__L.LocalizedProps, 'id' | 'vars' | 'attrs'>
 
 ${messages.map(genMessage).join("\n\n")}
 `
@@ -43,7 +43,7 @@ ${messages.map(genMessage).join("\n\n")}
 function genMessage(message: Message) {
     if (message.placeholders.length) {
         return (`\
-export function ${upperFirst(camelCase(message.id))}(props: __props & {vars: {${message.placeholders.map(genArgType).join(', ')}}}): JSX.Element {
+export function ${upperFirst(camelCase(message.id))}(props: __props${genVars(message.placeholders)}${genAttrs(message.attributes)}): JSX.Element {
     return <__L.Localized id="${message.id}" {...props} />
 }
 `)
@@ -57,12 +57,24 @@ export function ${upperFirst(camelCase(message.id))}(props: __props): JSX.Elemen
     }
 }
 
-function genArgType(v: Var) {
+function genVars(placeholders: Var[]): string {
+    return placeholders.length
+        ? ` & {vars: {${placeholders.map(genVarType).join(', ')}}}`
+        : ''
+}
+
+function genVarType(v: Var) {
     switch (v.type) {
         case VarType.STRING: return `${v.name}: string`
         case VarType.NUMBER: return `${v.name}: number`
         case VarType.DATETIME: return `${v.name}: Date`
     }
+}
+
+function genAttrs(attributes: Set<string>): string {
+    return attributes.size
+        ? ` & {attrs: {${Array.from(attributes.values()).map(a => `${JSON.stringify(a)}: boolean`).join(', ')}}}`
+        : ''
 }
 
 export default gen

@@ -11,6 +11,7 @@ export type Resource = {
 export type Message = {
     id: string,
     placeholders: Var[],
+    attributes: Set<string>,
 }
 export type Var = {
     name: string,
@@ -58,10 +59,11 @@ function parseResource_(path: string, raw: string): Resource {
     const msgs: Syntax.Message[] = resource.body.filter<Syntax.Message>((entry): entry is Syntax.Message => entry.type === 'Message')
     const messages: Message[] = msgs.map(message => {
         const id = message.id.name
+        const attributes = new Set(message.attributes.map(attr => attr.id.name))
         const patterns: Syntax.Pattern[] = [message.value, ...message.attributes.map(a => a.value)].filter((p): p is Syntax.Pattern => !!p)
         // TODO prefer numbers and datetimes over strings
         const placeholders: Var[] = uniqBy(patterns.map(parsePattern).flat(), 'name')
-        return { id, placeholders }
+        return { id, placeholders, attributes }
     })
     return { path, raw, resource, messages }
 }
