@@ -157,12 +157,7 @@ function genResource(messages) {
     return (genHeader + "\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport __React from 'react'\nimport * as __L from '@fluent/react'\n\n// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts\ntype __props = Omit<__L.LocalizedProps, 'id' | 'vars' | 'attrs'>\n\n" + messages.map(genMessage).join("\n\n") + "\n");
 }
 function genMessage(message) {
-    if (message.placeholders.length) {
-        return ("export function " + (0, lodash_1.upperFirst)((0, lodash_1.camelCase)(message.id)) + "(props: __props" + genVars(message.placeholders) + genAttrs(message.attributes) + "): JSX.Element {\n    return <__L.Localized id=\"" + message.id + "\" {...props} />\n}\n");
-    }
-    else {
-        return ("export function " + (0, lodash_1.upperFirst)((0, lodash_1.camelCase)(message.id)) + "(props: __props): JSX.Element {\n    return <__L.Localized id=\"" + message.id + "\" {...props} />\n}\n");
-    }
+    return ("export function " + (0, lodash_1.upperFirst)((0, lodash_1.camelCase)(message.id)) + "(props: __props" + genVars(message.placeholders) + genAttrs(message.attributes) + "): JSX.Element {\n    return <__L.Localized id=\"" + message.id + "\" {...props} />\n}\n");
 }
 function genVars(placeholders) {
     return placeholders.length

@@ -73,20 +73,11 @@ ${messages.map(genMessage).join("\n\n")}
     )
 }
 function genMessage(message: Message) {
-    if (message.placeholders.length) {
-        return (`\
+    return (`\
 export function ${upperFirst(camelCase(message.id))}(props: __props${genVars(message.placeholders)}${genAttrs(message.attributes)}): JSX.Element {
     return <__L.Localized id="${message.id}" {...props} />
 }
 `)
-    }
-    else {
-        return (`\
-export function ${upperFirst(camelCase(message.id))}(props: __props): JSX.Element {
-    return <__L.Localized id="${message.id}" {...props} />
-}
-`)
-    }
 }
 
 function genVars(placeholders: Var[]): string {
