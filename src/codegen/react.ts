@@ -33,7 +33,7 @@ ${genModuleTree(tree)}
 function genModuleTree(tree: Tree.Node): string {
     const leaves: Array<[string, string]> = tree.leaves.map(l => [l, camelCase(Path.join(...tree.path.concat([l])))])
     const nodes: Array<[string, string]> = Object.entries(tree.nodes).map(([name, n]) => [name, `{${genModuleTree(n)}}`])
-    return [...leaves, ...nodes].map(([lval, rval]) => `export const ${lowerFirst(lval)} = ${rval}`).join(`,\n${Array((tree.path.length - 1) * 4).fill(' ')}`)
+    return [...leaves, ...nodes].map(([lval, rval]) => `export const ${lowerFirst(camelCase(lval))} = ${rval}`).join(`,\n${Array((tree.path.length - 1) * 4).fill(' ')}`)
 }
 
 async function prettier(input: string): Promise<string> {

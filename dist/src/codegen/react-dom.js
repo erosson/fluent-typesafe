@@ -126,7 +126,7 @@ function genModuleTree(tree) {
     });
     return __spreadArray(__spreadArray([], leaves, true), nodes, true).map(function (_a) {
         var lval = _a[0], rval = _a[1];
-        return "export const " + (0, lodash_1.lowerFirst)(lval) + " = " + rval;
+        return "export const " + (0, lodash_1.lowerFirst)((0, lodash_1.camelCase)(lval)) + " = " + rval;
     }).join(",\n" + Array((tree.path.length - 1) * 4).fill(' '));
 }
 function prettier(input) {
