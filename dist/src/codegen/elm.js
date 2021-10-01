@@ -81,40 +81,42 @@ function main(resources, write) {
                 case 0: return [4 /*yield*/, Promise.all(resources.map(function (_a) {
                         var shortPath = _a[0], pending = _a[1];
                         return __awaiter(_this, void 0, void 0, function () {
-                            var resource, parsed, segments, moduleName, outputPath, output;
-                            return __generator(this, function (_b) {
-                                switch (_b.label) {
+                            var resource, parsed, namespace, _b, namespacedMsgs, nonNamespacedMsgs, isNamespaced, segments, moduleName, outputPath, output;
+                            return __generator(this, function (_c) {
+                                switch (_c.label) {
                                     case 0: return [4 /*yield*/, pending];
                                     case 1:
-                                        resource = _b.sent();
+                                        resource = _c.sent();
                                         parsed = path_1["default"].parse(shortPath);
+                                        namespace = (0, lodash_1.kebabCase)(path_1["default"].join(parsed.dir, parsed.name)) + "-";
+                                        _b = (0, lodash_1.partition)(resource.messages.map(function (m) { return m.id; }), function (m) { return m.startsWith(namespace); }), namespacedMsgs = _b[0], nonNamespacedMsgs = _b[1];
+                                        if (namespacedMsgs.length > 0 && nonNamespacedMsgs.length > 0) {
+                                            throw new Error("Cannot mix namespaced and non-namespaced keys in an ftl file. Namespaces are based on filename; \"" + shortPath + "\"'s namespace is \"" + namespace + "\".");
+                                        }
+                                        isNamespaced = namespacedMsgs.length > 0;
                                         segments = parsed.dir.split('/').filter(function (i) { return !!i; });
                                         segments.push(parsed.name);
                                         moduleName = "Localization." + segments.map(function (s) { return (0, lodash_1.upperFirst)((0, lodash_1.camelCase)(s)); }).join('.');
                                         outputPath = moduleName.replace('.', '/') + ".elm";
-                                        return [4 /*yield*/, elmFormat(genResource(resource.messages, moduleName))];
+                                        return [4 /*yield*/, elmFormat(genResource(resource.messages, moduleName, isNamespaced ? namespace : null))];
                                     case 2:
-                                        output = _b.sent();
+                                        output = _c.sent();
                                         return [4 /*yield*/, write(outputPath, output)];
                                     case 3:
-                                        _b.sent();
-                                        return [2 /*return*/, { name: moduleName, messages: resource.messages.map(function (message) { return message.id; }) }];
+                                        _c.sent();
+                                        return [2 /*return*/, { name: moduleName, messages: resource.messages.map(function (message) { return message.id; }), namespace: isNamespaced ? namespace : null }];
                                 }
                             });
                         });
-                    }))
-                    // console.log(genIndex(modules))
-                ];
+                    }))];
                 case 1:
                     modules = _c.sent();
+                    console.log(genIndex(modules));
                     _a = write;
                     _b = ['Localization.elm'];
                     return [4 /*yield*/, elmFormat(genIndex(modules))];
-                case 2: 
-                // console.log(genIndex(modules))
-                return [4 /*yield*/, _a.apply(void 0, _b.concat([_c.sent()]))];
+                case 2: return [4 /*yield*/, _a.apply(void 0, _b.concat([_c.sent()]))];
                 case 3:
-                    // console.log(genIndex(modules))
                     _c.sent();
                     return [2 /*return*/];
             }
@@ -124,12 +126,13 @@ function main(resources, write) {
 function genIndex(modules) {
     var root = Tree.build(modules.map(function (module) {
         var prefix = module.name.split('.').filter(function (i) { return i; });
-        return module.messages.map(function (msg) { return prefix.concat([(0, lodash_1.camelCase)(msg)]); });
+        return module.messages.map(function (msg) { return prefix.concat([(0, lodash_1.camelCase)(msg.slice((module.namespace || '').length))]); });
     }).flat());
     var tree = root.nodes.Localization;
-    return ("module Localization exposing (" + __spreadArray(__spreadArray([], tree.leaves, true), Object.keys(tree.nodes), true).map(lodash_1.lowerFirst).join(', ') + ")\n\n" + genHeader + "\n\n" + modules.map(function (m) { return "import " + m.name; }).join("\n") + "\n\n" + genModuleTree(tree) + "\n");
+    return ("module Localization exposing (" + __spreadArray(__spreadArray([], tree.leaves, true), Object.keys(tree.nodes), true).map(lodash_1.lowerFirst).join(', ') + ")\n\n" + genHeader + "\n\n" + modules.map(function (m) { return "import " + m.name; }).join("\n") + "\n\n" + genModuleTree(tree, "\n") + "\n");
 }
-function genModuleTree(tree) {
+function genModuleTree(tree, sep) {
+    if (sep === void 0) { sep = ', '; }
     var leaves = tree.leaves.map(function (l) { return [l, tree.path.concat([l]).join('.')]; });
     var nodes = Object.entries(tree.nodes).map(function (_a) {
         var name = _a[0], n = _a[1];
@@ -138,7 +141,7 @@ function genModuleTree(tree) {
     return __spreadArray(__spreadArray([], leaves, true), nodes, true).map(function (_a) {
         var lval = _a[0], rval = _a[1];
         return (0, lodash_1.lowerFirst)(lval) + " = " + rval;
-    }).join("\n" + Array((tree.path.length - 1) * 4).fill(' ').join('') + ", ");
+    }).join("\n" + Array((tree.path.length - 1) * 4).fill(' ').join('') + sep);
 }
 function elmFormat(input) {
     return __awaiter(this, void 0, void 0, function () {
@@ -165,17 +168,18 @@ function elmFormat(input) {
     });
 }
 var genHeader = '{-| File auto-generated by `@erosson/fluent-typesafe`. Do not edit! -}';
-function genResource(messages, moduleName) {
+function genResource(messages, moduleName, namespace) {
     var needsEncode = Math.max.apply(Math, messages.map(function (m) { return m.placeholders.length; })) > 0;
     var needsPosix = messages.map(function (m) { return m.placeholders; }).flat().filter(function (v) { return v.type === parser_1.VarType.DATETIME; }).length > 0;
-    return ("module " + moduleName + " exposing(" + messages.map(function (m) { return (0, lodash_1.camelCase)(m.id); }).join(', ') + ")\n\n" + genHeader + "\n\nimport Html as H\nimport Html.Attributes as A\n" + (needsEncode ? 'import Json.Encode as E' : '') + "\n" + (needsPosix ? 'import Time exposing (Posix)' : '') + "\n\n\n" + messages.map(genMessage).join("\n\n") + "\n");
+    return ("module " + moduleName + " exposing(" + messages.map(function (m) { return (0, lodash_1.camelCase)(m.id); }).join(', ') + ")\n\n" + genHeader + "\n\nimport Html as H\nimport Html.Attributes as A\n" + (needsEncode ? 'import Json.Encode as E' : '') + "\n" + (needsPosix ? 'import Time exposing (Posix)' : '') + "\n\n\n" + messages.map(function (m) { return genMessage(m, namespace); }).join("\n\n") + "\n");
 }
-function genMessage(message) {
+function genMessage(message, namespace) {
+    var name = (0, lodash_1.camelCase)(message.id.slice((namespace || '').length));
     if (message.placeholders.length) {
-        return ((0, lodash_1.camelCase)(message.id) + ": { " + message.placeholders.map(genArgType).join(', ') + " } -> List (H.Attribute msg)\n" + (0, lodash_1.camelCase)(message.id) + " " + (message.placeholders.length ? 'args ' : '') + "=\n    [ A.attribute \"data-l10n-id\" " + JSON.stringify(message.id) + "\n    , A.attribute \"data-l10n-args\" <| E.encode 0 <| E.object\n        [ " + message.placeholders.map(genArgEncoder).join("\n        , ") + "\n        ]\n    ]\n");
+        return (name + ": { " + message.placeholders.map(genArgType).join(', ') + " } -> List (H.Attribute msg)\n" + name + " " + (message.placeholders.length ? 'args ' : '') + "=\n    [ A.attribute \"data-l10n-id\" " + JSON.stringify(message.id) + "\n    , A.attribute \"data-l10n-args\" <| E.encode 0 <| E.object\n        [ " + message.placeholders.map(genArgEncoder).join("\n        , ") + "\n        ]\n    ]\n");
     }
     else {
-        return ((0, lodash_1.camelCase)(message.id) + ": H.Attribute msg\n" + (0, lodash_1.camelCase)(message.id) + " =\n    A.attribute \"data-l10n-id\" " + JSON.stringify(message.id) + "\n");
+        return (name + ": H.Attribute msg\n" + name + " =\n    A.attribute \"data-l10n-id\" " + JSON.stringify(message.id) + "\n");
     }
 }
 function genArgType(v) {
