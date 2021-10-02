@@ -115,7 +115,8 @@ function parseResource_(path, raw) {
         var patterns = __spreadArray([message.value], message.attributes.map(function (a) { return a.value; }), true).filter(function (p) { return !!p; });
         // TODO prefer numbers and datetimes over strings
         var placeholders = (0, lodash_1.uniqBy)(patterns.map(parsePattern).flat(), 'name');
-        return { id: id, placeholders: placeholders, attributes: attributes };
+        var rawMsg = raw.slice(message.span.start, message.span.end);
+        return { id: id, placeholders: placeholders, attributes: attributes, raw: rawMsg };
     });
     return { path: path, raw: raw, resource: resource, messages: messages };
 }
