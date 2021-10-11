@@ -3,15 +3,17 @@ import { promises as fs } from 'fs'
 import glob from 'glob'
 import { promisify } from 'util'
 import Path from 'path'
+import Chokidar from 'chokidar'
 
+import debounce from 'lodash/debounce'
 import * as Parser from './parser'
 import ElmFormat from './codegen/elm'
 import ReactFormat from './codegen/react'
 import ReactDomFormat from './codegen/react-dom'
 
-const usage = `usage: \`fluent-typesafe [--dry-run] --format=[elm|react|react-dom] --out=OUTPUT_DIRECTORY FTL_DIRECTORY\``
+const usage = `usage: \`fluent-typesafe --format=[elm|react|react-dom] [--dry-run] [--watch] --out=OUTPUT_DIRECTORY FTL_DIRECTORY\``
 
-type Args = { inputDir: string, outputDir: string, format: Format, dryRun: boolean }
+type Args = { inputDir: string, outputDir: string, format: Format, dryRun: boolean, watch: boolean }
 type Format = 'elm' | 'react' | 'react-dom'
 type Runner = (resources: Array<[string, Promise<Parser.Resource>]>, write: ((path: string, data: string) => Promise<void>)) => Promise<void>
 
@@ -19,10 +21,11 @@ function parse(args: Minimist.ParsedArgs): Args {
     const inputDir: string | null = args._[0]
     const outputDir: string | null = args['out']
     const dryRun: boolean | null = args['dry-run']
+    const watch: boolean | null = args['watch']
     if (!inputDir || !outputDir) {
         throw new Error(usage)
     }
-    return { format: parseFormat(args), inputDir, outputDir, dryRun }
+    return { format: parseFormat(args), inputDir, outputDir, dryRun, watch }
 }
 function parseFormat(args: Minimist.ParsedArgs): Format {
     switch (args.format) {
@@ -54,13 +57,23 @@ function write(args: Args) {
 
 async function main() {
     const args = parse(Minimist(process.argv.slice(2), { string: ['format', 'out'], boolean: ['dry-run'] }))
-    const inputs: string[] = await promisify(glob)('**/*.ftl', { cwd: args.inputDir })
+    const pattern = '**/*.ftl'
+    const inputs: string[] = await promisify(glob)(pattern, { cwd: args.inputDir })
     if (args.dryRun) {
         console.log(args, inputs)
     }
     const resources: Array<[string, Promise<Parser.Resource>]> = inputs.map(p => [p, Parser.parseResource(Path.join(args.inputDir, p))])
-    const runner: Runner = runnerFormat(args.format)
-    return await runner(resources, write(args))
+    const runner: Runner = debounce(runnerFormat(args.format), 800)
+    const writer = write(args)
+    if (args.watch) {
+        return Chokidar.watch(pattern, { persistent: true, awaitWriteFinish: true })
+            .on('add', path => runner(resources, writer))
+            .on('change', path => runner(resources, writer))
+            .on('unlink', path => runner(resources, writer))
+    }
+    else {
+        return await runner(resources, writer)
+    }
 }
 
 main().catch(e => {

@@ -63,19 +63,22 @@ var fs_1 = require("fs");
 var glob_1 = __importDefault(require("glob"));
 var util_1 = require("util");
 var path_1 = __importDefault(require("path"));
+var chokidar_1 = __importDefault(require("chokidar"));
+var debounce_1 = __importDefault(require("lodash/debounce"));
 var Parser = __importStar(require("./parser"));
 var elm_1 = __importDefault(require("./codegen/elm"));
 var react_1 = __importDefault(require("./codegen/react"));
 var react_dom_1 = __importDefault(require("./codegen/react-dom"));
-var usage = "usage: `fluent-typesafe [--dry-run] --format=[elm|react|react-dom] --out=OUTPUT_DIRECTORY FTL_DIRECTORY`";
+var usage = "usage: `fluent-typesafe --format=[elm|react|react-dom] [--dry-run] [--watch] --out=OUTPUT_DIRECTORY FTL_DIRECTORY`";
 function parse(args) {
     var inputDir = args._[0];
     var outputDir = args['out'];
     var dryRun = args['dry-run'];
+    var watch = args['watch'];
     if (!inputDir || !outputDir) {
         throw new Error(usage);
     }
-    return { format: parseFormat(args), inputDir: inputDir, outputDir: outputDir, dryRun: dryRun };
+    return { format: parseFormat(args), inputDir: inputDir, outputDir: outputDir, dryRun: dryRun, watch: watch };
 }
 function parseFormat(args) {
     switch (args.format) {
@@ -116,21 +119,28 @@ function write(args) {
 }
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var args, inputs, resources, runner;
+        var args, pattern, inputs, resources, runner, writer;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     args = parse((0, minimist_1["default"])(process.argv.slice(2), { string: ['format', 'out'], boolean: ['dry-run'] }));
-                    return [4 /*yield*/, (0, util_1.promisify)(glob_1["default"])('**/*.ftl', { cwd: args.inputDir })];
+                    pattern = '**/*.ftl';
+                    return [4 /*yield*/, (0, util_1.promisify)(glob_1["default"])(pattern, { cwd: args.inputDir })];
                 case 1:
                     inputs = _a.sent();
                     if (args.dryRun) {
                         console.log(args, inputs);
                     }
                     resources = inputs.map(function (p) { return [p, Parser.parseResource(path_1["default"].join(args.inputDir, p))]; });
-                    runner = runnerFormat(args.format);
-                    return [4 /*yield*/, runner(resources, write(args))];
-                case 2: return [2 /*return*/, _a.sent()];
+                    runner = (0, debounce_1["default"])(runnerFormat(args.format), 800);
+                    writer = write(args);
+                    if (!args.watch) return [3 /*break*/, 2];
+                    return [2 /*return*/, chokidar_1["default"].watch(pattern, { persistent: true, awaitWriteFinish: true })
+                            .on('add', function (path) { return runner(resources, writer); })
+                            .on('change', function (path) { return runner(resources, writer); })
+                            .on('unlink', function (path) { return runner(resources, writer); })];
+                case 2: return [4 /*yield*/, runner(resources, writer)];
+                case 3: return [2 /*return*/, _a.sent()];
             }
         });
     });
