@@ -55,7 +55,7 @@ function parsePattern(pattern: Syntax.Pattern): Var[] {
     const placeables = pattern.elements.filter((el): el is Syntax.Placeable => el.type === 'Placeable')
     return placeables.map(el => parseExpression(el.expression)).flat().filter((exp): exp is Var => !!exp)
 }
-function parseResource_(path: string, raw: string): Resource {
+export function parseResource_(path: string, raw: string): Resource {
     const resource = Syntax.parse(raw, {})
     const msgs: Syntax.Message[] = resource.body.filter<Syntax.Message>((entry): entry is Syntax.Message => entry.type === 'Message')
     const messages: Message[] = msgs.map(message => {

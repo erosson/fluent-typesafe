@@ -64,7 +64,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 exports.__esModule = true;
-exports.parseResource = exports.VarType = void 0;
+exports.parseResource = exports.parseResource_ = exports.VarType = void 0;
 var Syntax = __importStar(require("@fluent/syntax"));
 var fs_1 = require("fs");
 var lodash_1 = require("lodash");
@@ -120,6 +120,7 @@ function parseResource_(path, raw) {
     });
     return { path: path, raw: raw, resource: resource, messages: messages };
 }
+exports.parseResource_ = parseResource_;
 function parseResource(path) {
     return __awaiter(this, void 0, void 0, function () {
         var raw;
