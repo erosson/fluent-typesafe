@@ -188,7 +188,7 @@ function genResource(p) {
     var messages = p.messages, shortPath = p.shortPath, moduleName = p.moduleName, namespace = p.namespace;
     var needsEncode = Math.max.apply(Math, messages.map(function (m) { return m.placeholders.length; })) > 0;
     var needsPosix = messages.map(function (m) { return m.placeholders; }).flat().filter(function (v) { return v.type === parser_1.VarType.DATETIME; }).length > 0;
-    return ("module " + moduleName + " exposing(" + messages.map(function (m) { return (0, lodash_1.camelCase)(m.id); }).join(', ') + ")\n\n" + genHeader + "\n\nimport Html as H\nimport Html.Attributes as A\n" + (needsEncode ? 'import Json.Encode as E' : '') + "\n" + (needsPosix ? 'import Time exposing (Posix)' : '') + "\n\n\n" + messages.map(function (m) { return genMessage(__assign({ message: m }, p)); }).join("\n\n") + "\n");
+    return ("module " + moduleName + " exposing(" + ['name_'].concat(messages.map(function (m) { return (0, lodash_1.camelCase)(m.id); })).join(', ') + ")\n\n" + genHeader + "\n\nimport Html as H\nimport Html.Attributes as A\n" + (needsEncode ? 'import Json.Encode as E' : '') + "\n" + (needsPosix ? 'import Time exposing (Posix)' : '') + "\n\nname_ : String -> H.Attribute msg\nname_ = A.attribute \"data-l10n-name\"\n\n" + messages.map(function (m) { return genMessage(__assign({ message: m }, p)); }).join("\n\n") + "\n");
 }
 function genMessage(p) {
     var message = p.message, namespace = p.namespace;

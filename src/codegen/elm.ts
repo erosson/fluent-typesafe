@@ -81,7 +81,7 @@ function genResource(p: { messages: Message[], shortPath: string, moduleName: st
     const needsEncode = Math.max(...messages.map(m => m.placeholders.length)) > 0
     const needsPosix = messages.map(m => m.placeholders).flat().filter(v => v.type === VarType.DATETIME).length > 0
     return (`\
-module ${moduleName} exposing(${messages.map(m => camelCase(m.id)).join(', ')})
+module ${moduleName} exposing(${['name_'].concat(messages.map(m => camelCase(m.id))).join(', ')})
 
 ${genHeader}
 
@@ -90,6 +90,8 @@ import Html.Attributes as A
 ${needsEncode ? 'import Json.Encode as E' : ''}
 ${needsPosix ? 'import Time exposing (Posix)' : ''}
 
+name_ : String -> H.Attribute msg
+name_ = A.attribute "data-l10n-name"
 
 ${messages.map(m => genMessage({ message: m, ...p })).join("\n\n")}
 `

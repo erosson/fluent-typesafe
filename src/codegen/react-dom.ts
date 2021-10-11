@@ -72,6 +72,10 @@ ${genHeader}
 
 ${namespace ? `export const NAMESPACE = ${JSON.stringify(namespace)}` : ''}
 
+export function name_(name: string): {'data-l10n-name': string} {
+    return {'data-l10n-name': name}
+}
+
 ${messages.map(m => genMessage({ message: m, ...p })).join("\n\n")}
 `
     )
@@ -83,7 +87,7 @@ function genMessage(p: { message: Message, shortPath: string, namespace: string 
         return (
             `\
 ${genDocstring({ message, ...p })}
-export function ${name}(args: {${message.placeholders.map(genArgType).join(', ')}}): {'data-l10n-id': string, 'data-l10n-args': string } {
+export function ${name}(args: {${message.placeholders.map(genArgType).join(', ')}}): {'data-l10n-id': string, 'data-l10n-args': string} {
     return {
         "data-l10n-id": ${JSON.stringify(message.id)},
         "data-l10n-args": JSON.stringify({${message.placeholders.map(genArgEncoder).map(arg => `\n            ${arg},`).join('')}
