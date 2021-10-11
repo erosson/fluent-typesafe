@@ -1,6 +1,6 @@
 import Minimist from 'minimist'
 import { promises as fs } from 'fs'
-import glob from 'glob'
+import _glob from 'glob'
 import { promisify } from 'util'
 import Path from 'path'
 import Chokidar from 'chokidar'
@@ -11,6 +11,7 @@ import ElmFormat from './codegen/elm'
 import ReactFormat from './codegen/react'
 import ReactDomFormat from './codegen/react-dom'
 
+const glob: (pattern: string, opts: object) => Promise<string[]> = promisify(_glob)
 const usage = `usage: \`fluent-typesafe --format=[elm|react|react-dom] [--dry-run] [--watch] --out=OUTPUT_DIRECTORY FTL_DIRECTORY\``
 
 type Args = { inputDir: string, outputDir: string, format: Format, dryRun: boolean, watch: boolean }
@@ -58,21 +59,26 @@ function write(args: Args) {
 async function main() {
     const args = parse(Minimist(process.argv.slice(2), { string: ['format', 'out'], boolean: ['dry-run'] }))
     const pattern = '**/*.ftl'
-    const inputs: string[] = await promisify(glob)(pattern, { cwd: args.inputDir })
-    if (args.dryRun) {
-        console.log(args, inputs)
-    }
-    const resources: Array<[string, Promise<Parser.Resource>]> = inputs.map(p => [p, Parser.parseResource(Path.join(args.inputDir, p))])
+
     const runner: Runner = debounce(runnerFormat(args.format), 800)
     const writer = write(args)
+    async function run() {
+        const inputs: string[] = await glob(pattern, { cwd: args.inputDir })
+        if (args.dryRun) {
+            console.log(args, inputs)
+        }
+        const resources: Array<[string, Promise<Parser.Resource>]> =
+            inputs.map(p => [p, Parser.parseResource(Path.join(args.inputDir, p))])
+        return runner(resources, writer)
+    }
     if (args.watch) {
         return Chokidar.watch(pattern, { persistent: true, awaitWriteFinish: true })
-            .on('add', path => runner(resources, writer))
-            .on('change', path => runner(resources, writer))
-            .on('unlink', path => runner(resources, writer))
+            .on('add', run)
+            .on('change', run)
+            .on('unlink', run)
     }
     else {
-        return await runner(resources, writer)
+        return await run()
     }
 }
 
