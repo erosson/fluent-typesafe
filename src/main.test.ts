@@ -14,6 +14,8 @@ hello = world
         const writer = jest.fn()
         await format([[path, Promise.resolve(parsed)]], writer)
         expect(writer.mock.calls.length).toBe(2)
-        expect({ label, calls: writer.mock.calls }).toMatchSnapshot()
+        // consistent windows/linux path behavior
+        const calls = writer.mock.calls.map(([path, body]) => [path.replace('\\', '/'), body])
+        expect({ label, calls }).toMatchSnapshot()
     }
 })
