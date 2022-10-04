@@ -2,7 +2,7 @@ import Path from 'path'
 import { lowerFirst, upperFirst, camelCase, kebabCase, partition } from 'lodash'
 import * as childProcess from 'child_process'
 import * as util from 'util'
-import * as fs from 'fs/promises'
+import { promises as fs } from 'fs'
 import * as os from 'os'
 
 import * as Tree from '../tree'
