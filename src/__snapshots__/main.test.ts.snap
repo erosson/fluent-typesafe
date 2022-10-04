@@ -1,5 +1,4090 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`kw-params 1`] = `
+Object {
+  "messages": Array [
+    Object {
+      "attributes": Set {},
+      "id": "hello",
+      "placeholders": Array [],
+      "raw": "hello = world",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "with-kw-literal",
+      "placeholders": Array [],
+      "raw": "with-kw-literal = hello {-with-variable(world: \\"world\\")}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "with-pub-variable",
+      "placeholders": Array [
+        Object {
+          "name": "world",
+          "type": "string",
+        },
+      ],
+      "raw": "with-pub-variable = hello {$world}",
+    },
+  ],
+  "path": "app.ftl",
+  "raw": "hello = world
+-with-variable = hello {$world}
+with-kw-literal = hello {-with-variable(world: \\"world\\")}
+fails-with-kw-variable = hello {-with-variable(world: $world)}
+
+with-pub-variable = hello {$world}
+fails-with-pub-kw-literal = hello {with-pub-variable(world: \\"world\\")}
+",
+  "resource": Resource {
+    "body": Array [
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "hello",
+          "span": Span {
+            "end": 5,
+            "start": 0,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 13,
+          "start": 0,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 13,
+                "start": 8,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "world",
+            },
+          ],
+          "span": Span {
+            "end": 13,
+            "start": 8,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Term {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-variable",
+          "span": Span {
+            "end": 28,
+            "start": 15,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 45,
+          "start": 14,
+          "type": "Span",
+        },
+        "type": "Term",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 37,
+                "start": 31,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "hello ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "world",
+                  "span": Span {
+                    "end": 44,
+                    "start": 39,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 44,
+                  "start": 38,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 45,
+                "start": 37,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 45,
+            "start": 31,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-kw-literal",
+          "span": Span {
+            "end": 61,
+            "start": 46,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 102,
+          "start": 46,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 70,
+                "start": 64,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "hello ",
+            },
+            Placeable {
+              "expression": TermReference {
+                "arguments": CallArguments {
+                  "named": Array [
+                    NamedArgument {
+                      "name": Identifier {
+                        "name": "world",
+                        "span": Span {
+                          "end": 91,
+                          "start": 86,
+                          "type": "Span",
+                        },
+                        "type": "Identifier",
+                      },
+                      "span": Span {
+                        "end": 100,
+                        "start": 86,
+                        "type": "Span",
+                      },
+                      "type": "NamedArgument",
+                      "value": StringLiteral {
+                        "span": Span {
+                          "end": 100,
+                          "start": 93,
+                          "type": "Span",
+                        },
+                        "type": "StringLiteral",
+                        "value": "world",
+                      },
+                    },
+                  ],
+                  "positional": Array [],
+                  "span": Span {
+                    "end": 101,
+                    "start": 85,
+                    "type": "Span",
+                  },
+                  "type": "CallArguments",
+                },
+                "attribute": null,
+                "id": Identifier {
+                  "name": "with-variable",
+                  "span": Span {
+                    "end": 85,
+                    "start": 72,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 101,
+                  "start": 71,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 102,
+                "start": 70,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 102,
+            "start": 64,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Junk {
+        "annotations": Array [
+          Annotation {
+            "arguments": Array [],
+            "code": "E0014",
+            "message": "Expected literal",
+            "span": Span {
+              "end": 157,
+              "start": 157,
+              "type": "Span",
+            },
+            "type": "Annotation",
+          },
+        ],
+        "content": "fails-with-kw-variable = hello {-with-variable(world: $world)}
+
+",
+        "span": Span {
+          "end": 167,
+          "start": 103,
+          "type": "Span",
+        },
+        "type": "Junk",
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-pub-variable",
+          "span": Span {
+            "end": 184,
+            "start": 167,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 201,
+          "start": 167,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 193,
+                "start": 187,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "hello ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "world",
+                  "span": Span {
+                    "end": 200,
+                    "start": 195,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 200,
+                  "start": 194,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 201,
+                "start": 193,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 201,
+            "start": 187,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Junk {
+        "annotations": Array [
+          Annotation {
+            "arguments": Array [],
+            "code": "E0008",
+            "message": "The callee has to be an upper-case identifier or a term",
+            "span": Span {
+              "end": 254,
+              "start": 254,
+              "type": "Span",
+            },
+            "type": "Annotation",
+          },
+        ],
+        "content": "fails-with-pub-kw-literal = hello {with-pub-variable(world: \\"world\\")}
+",
+        "span": Span {
+          "end": 272,
+          "start": 202,
+          "type": "Span",
+        },
+        "type": "Junk",
+      },
+    ],
+    "span": Span {
+      "end": 272,
+      "start": 0,
+      "type": "Span",
+    },
+    "type": "Resource",
+  },
+}
+`;
+
+exports[`kw-params: elm 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "Localization/App.elm",
+      "module Localization.App exposing (hello, name_, withKwLiteral, withPubVariable)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Html as H
+import Html.Attributes as A
+import Json.Encode as E
+
+
+name_ : String -> H.Attribute msg
+name_ =
+    A.attribute \\"data-l10n-name\\"
+
+
+{-| Fluent message id \`hello\`, in file \`app.ftl\`
+
+    hello =
+        world
+
+-}
+hello : H.Attribute msg
+hello =
+    A.attribute \\"data-l10n-id\\" \\"hello\\"
+
+
+{-| Fluent message id \`with-kw-literal\`, in file \`app.ftl\`
+
+    with-kw-literal = hello {\\\\-with-variable(world: \\"world\\")}
+
+-}
+withKwLiteral : H.Attribute msg
+withKwLiteral =
+    A.attribute \\"data-l10n-id\\" \\"with-kw-literal\\"
+
+
+{-| Fluent message id \`with-pub-variable\`, in file \`app.ftl\`
+
+    with-pub-variable = hello {$world}
+
+-}
+withPubVariable : { world : String } -> List (H.Attribute msg)
+withPubVariable args =
+    [ A.attribute \\"data-l10n-id\\" \\"with-pub-variable\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"world\\", E.string args.world )
+                ]
+    ]
+",
+    ],
+    Array [
+      "Localization.elm",
+      "module Localization exposing (app)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Localization.App
+
+
+app =
+    { hello = Localization.App.hello
+    , withKwLiteral = Localization.App.withKwLiteral
+    , withPubVariable = Localization.App.withPubVariable
+    }
+",
+    ],
+  ],
+  "label": "elm",
+}
+`;
+
+exports[`kw-params: react 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.tsx",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import __React from \\"react\\";
+import * as __L from \\"@fluent/react\\";
+
+// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
+type __props = Omit<__L.LocalizedProps, \\"id\\" | \\"vars\\" | \\"attrs\\">;
+
+/** Fluent message id \`hello\`, in file \`app.ftl\`
+
+\`\`\`
+hello = world
+\`\`\`
+
+*/
+
+export function Hello(props: __props): JSX.Element {
+  return <__L.Localized id=\\"hello\\" {...props} />;
+}
+
+/** Fluent message id \`with-kw-literal\`, in file \`app.ftl\`
+
+\`\`\`
+with-kw-literal = hello {-with-variable(world: \\"world\\")}
+\`\`\`
+
+*/
+
+export function WithKwLiteral(props: __props): JSX.Element {
+  return <__L.Localized id=\\"with-kw-literal\\" {...props} />;
+}
+
+/** Fluent message id \`with-pub-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-pub-variable = hello {$world}
+\`\`\`
+
+*/
+
+export function WithPubVariable(
+  props: __props & { vars: { world: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"with-pub-variable\\" {...props} />;
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react",
+}
+`;
+
+exports[`kw-params: react-dom 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+export function name_(name: string): { \\"data-l10n-name\\": string } {
+  return { \\"data-l10n-name\\": name };
+}
+
+/** Fluent message id \`hello\`, in file \`app.ftl\`
+
+\`\`\`
+hello = world
+\`\`\`
+
+*/
+
+export const hello: { \\"data-l10n-id\\": string } = { \\"data-l10n-id\\": \\"hello\\" };
+
+/** Fluent message id \`with-kw-literal\`, in file \`app.ftl\`
+
+\`\`\`
+with-kw-literal = hello {-with-variable(world: \\"world\\")}
+\`\`\`
+
+*/
+
+export const withKwLiteral: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"with-kw-literal\\",
+};
+
+/** Fluent message id \`with-pub-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-pub-variable = hello {$world}
+\`\`\`
+
+*/
+
+export function withPubVariable(args: { world: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"with-pub-variable\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      world: args.world,
+    }),
+  };
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react-dom",
+}
+`;
+
+exports[`params 1`] = `
+Object {
+  "messages": Array [
+    Object {
+      "attributes": Set {},
+      "id": "hello",
+      "placeholders": Array [],
+      "raw": "hello = world",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "with-string-variable",
+      "placeholders": Array [
+        Object {
+          "name": "world",
+          "type": "string",
+        },
+      ],
+      "raw": "with-string-variable = hello {$world}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "with-string-term",
+      "placeholders": Array [],
+      "raw": "with-string-term = hello {hello}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "with-number-variable",
+      "placeholders": Array [
+        Object {
+          "name": "num",
+          "type": "number",
+        },
+      ],
+      "raw": "with-number-variable = there are {NUMBER($num)} lights",
+    },
+  ],
+  "path": "app.ftl",
+  "raw": "hello = world
+with-string-variable = hello {$world}
+with-string-term = hello {hello}
+with-number-variable = there are {NUMBER($num)} lights
+",
+  "resource": Resource {
+    "body": Array [
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "hello",
+          "span": Span {
+            "end": 5,
+            "start": 0,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 13,
+          "start": 0,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 13,
+                "start": 8,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "world",
+            },
+          ],
+          "span": Span {
+            "end": 13,
+            "start": 8,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-string-variable",
+          "span": Span {
+            "end": 34,
+            "start": 14,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 51,
+          "start": 14,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 43,
+                "start": 37,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "hello ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "world",
+                  "span": Span {
+                    "end": 50,
+                    "start": 45,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 50,
+                  "start": 44,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 51,
+                "start": 43,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 51,
+            "start": 37,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-string-term",
+          "span": Span {
+            "end": 68,
+            "start": 52,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 84,
+          "start": 52,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 77,
+                "start": 71,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "hello ",
+            },
+            Placeable {
+              "expression": MessageReference {
+                "attribute": null,
+                "id": Identifier {
+                  "name": "hello",
+                  "span": Span {
+                    "end": 83,
+                    "start": 78,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 83,
+                  "start": 78,
+                  "type": "Span",
+                },
+                "type": "MessageReference",
+              },
+              "span": Span {
+                "end": 84,
+                "start": 77,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 84,
+            "start": 71,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "with-number-variable",
+          "span": Span {
+            "end": 105,
+            "start": 85,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 139,
+          "start": 85,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 118,
+                "start": 108,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "there are ",
+            },
+            Placeable {
+              "expression": FunctionReference {
+                "arguments": CallArguments {
+                  "named": Array [],
+                  "positional": Array [
+                    VariableReference {
+                      "id": Identifier {
+                        "name": "num",
+                        "span": Span {
+                          "end": 130,
+                          "start": 127,
+                          "type": "Span",
+                        },
+                        "type": "Identifier",
+                      },
+                      "span": Span {
+                        "end": 130,
+                        "start": 126,
+                        "type": "Span",
+                      },
+                      "type": "VariableReference",
+                    },
+                  ],
+                  "span": Span {
+                    "end": 131,
+                    "start": 125,
+                    "type": "Span",
+                  },
+                  "type": "CallArguments",
+                },
+                "id": Identifier {
+                  "name": "NUMBER",
+                  "span": Span {
+                    "end": 125,
+                    "start": 119,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 131,
+                  "start": 119,
+                  "type": "Span",
+                },
+                "type": "FunctionReference",
+              },
+              "span": Span {
+                "end": 132,
+                "start": 118,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 139,
+                "start": 132,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": " lights",
+            },
+          ],
+          "span": Span {
+            "end": 139,
+            "start": 108,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+    ],
+    "span": Span {
+      "end": 140,
+      "start": 0,
+      "type": "Span",
+    },
+    "type": "Resource",
+  },
+}
+`;
+
+exports[`params: elm 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "Localization/App.elm",
+      "module Localization.App exposing (hello, name_, withNumberVariable, withStringTerm, withStringVariable)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Html as H
+import Html.Attributes as A
+import Json.Encode as E
+
+
+name_ : String -> H.Attribute msg
+name_ =
+    A.attribute \\"data-l10n-name\\"
+
+
+{-| Fluent message id \`hello\`, in file \`app.ftl\`
+
+    hello =
+        world
+
+-}
+hello : H.Attribute msg
+hello =
+    A.attribute \\"data-l10n-id\\" \\"hello\\"
+
+
+{-| Fluent message id \`with-string-variable\`, in file \`app.ftl\`
+
+    with-string-variable = hello {$world}
+
+-}
+withStringVariable : { world : String } -> List (H.Attribute msg)
+withStringVariable args =
+    [ A.attribute \\"data-l10n-id\\" \\"with-string-variable\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"world\\", E.string args.world )
+                ]
+    ]
+
+
+{-| Fluent message id \`with-string-term\`, in file \`app.ftl\`
+
+    with-string-term = hello {hello}
+
+-}
+withStringTerm : H.Attribute msg
+withStringTerm =
+    A.attribute \\"data-l10n-id\\" \\"with-string-term\\"
+
+
+{-| Fluent message id \`with-number-variable\`, in file \`app.ftl\`
+
+    with-number-variable = there are {NUMBER($num)} lights
+
+-}
+withNumberVariable : { num : Float } -> List (H.Attribute msg)
+withNumberVariable args =
+    [ A.attribute \\"data-l10n-id\\" \\"with-number-variable\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"num\\", E.float args.num )
+                ]
+    ]
+",
+    ],
+    Array [
+      "Localization.elm",
+      "module Localization exposing (app)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Localization.App
+
+
+app =
+    { hello = Localization.App.hello
+    , withStringVariable = Localization.App.withStringVariable
+    , withStringTerm = Localization.App.withStringTerm
+    , withNumberVariable = Localization.App.withNumberVariable
+    }
+",
+    ],
+  ],
+  "label": "elm",
+}
+`;
+
+exports[`params: react 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.tsx",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import __React from \\"react\\";
+import * as __L from \\"@fluent/react\\";
+
+// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
+type __props = Omit<__L.LocalizedProps, \\"id\\" | \\"vars\\" | \\"attrs\\">;
+
+/** Fluent message id \`hello\`, in file \`app.ftl\`
+
+\`\`\`
+hello = world
+\`\`\`
+
+*/
+
+export function Hello(props: __props): JSX.Element {
+  return <__L.Localized id=\\"hello\\" {...props} />;
+}
+
+/** Fluent message id \`with-string-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-string-variable = hello {$world}
+\`\`\`
+
+*/
+
+export function WithStringVariable(
+  props: __props & { vars: { world: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"with-string-variable\\" {...props} />;
+}
+
+/** Fluent message id \`with-string-term\`, in file \`app.ftl\`
+
+\`\`\`
+with-string-term = hello {hello}
+\`\`\`
+
+*/
+
+export function WithStringTerm(props: __props): JSX.Element {
+  return <__L.Localized id=\\"with-string-term\\" {...props} />;
+}
+
+/** Fluent message id \`with-number-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-number-variable = there are {NUMBER($num)} lights
+\`\`\`
+
+*/
+
+export function WithNumberVariable(
+  props: __props & { vars: { num: number } }
+): JSX.Element {
+  return <__L.Localized id=\\"with-number-variable\\" {...props} />;
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react",
+}
+`;
+
+exports[`params: react-dom 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+export function name_(name: string): { \\"data-l10n-name\\": string } {
+  return { \\"data-l10n-name\\": name };
+}
+
+/** Fluent message id \`hello\`, in file \`app.ftl\`
+
+\`\`\`
+hello = world
+\`\`\`
+
+*/
+
+export const hello: { \\"data-l10n-id\\": string } = { \\"data-l10n-id\\": \\"hello\\" };
+
+/** Fluent message id \`with-string-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-string-variable = hello {$world}
+\`\`\`
+
+*/
+
+export function withStringVariable(args: { world: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"with-string-variable\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      world: args.world,
+    }),
+  };
+}
+
+/** Fluent message id \`with-string-term\`, in file \`app.ftl\`
+
+\`\`\`
+with-string-term = hello {hello}
+\`\`\`
+
+*/
+
+export const withStringTerm: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"with-string-term\\",
+};
+
+/** Fluent message id \`with-number-variable\`, in file \`app.ftl\`
+
+\`\`\`
+with-number-variable = there are {NUMBER($num)} lights
+\`\`\`
+
+*/
+
+export function withNumberVariable(args: { num: number }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"with-number-variable\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      num: args.num,
+    }),
+  };
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react-dom",
+}
+`;
+
+exports[`projectfluent.org example 1 1`] = `
+Object {
+  "messages": Array [
+    Object {
+      "attributes": Set {},
+      "id": "hello-user",
+      "placeholders": Array [
+        Object {
+          "name": "userName",
+          "type": "string",
+        },
+      ],
+      "raw": "# Simple things are simple.
+hello-user = Hello, {$userName}!",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "shared-photos",
+      "placeholders": Array [
+        Object {
+          "name": "userName",
+          "type": "string",
+        },
+        Object {
+          "name": "photoCount",
+          "type": "string",
+        },
+        Object {
+          "name": "userGender",
+          "type": "string",
+        },
+      ],
+      "raw": "# Complex things are possible.
+shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.",
+    },
+  ],
+  "path": "app.ftl",
+  "raw": "# Simple things are simple.
+hello-user = Hello, {$userName}!
+
+# Complex things are possible.
+shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+",
+  "resource": Resource {
+    "body": Array [
+      Message {
+        "attributes": Array [],
+        "comment": Comment {
+          "content": "Simple things are simple.",
+          "span": Span {
+            "end": 27,
+            "start": 0,
+            "type": "Span",
+          },
+          "type": "Comment",
+        },
+        "id": Identifier {
+          "name": "hello-user",
+          "span": Span {
+            "end": 38,
+            "start": 28,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 60,
+          "start": 0,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 48,
+                "start": 41,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Hello, ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "userName",
+                  "span": Span {
+                    "end": 58,
+                    "start": 50,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 58,
+                  "start": 49,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 59,
+                "start": 48,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 60,
+                "start": 59,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "!",
+            },
+          ],
+          "span": Span {
+            "end": 60,
+            "start": 41,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": Comment {
+          "content": "Complex things are possible.",
+          "span": Span {
+            "end": 92,
+            "start": 62,
+            "type": "Span",
+          },
+          "type": "Comment",
+        },
+        "id": Identifier {
+          "name": "shared-photos",
+          "span": Span {
+            "end": 106,
+            "start": 93,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 334,
+          "start": 62,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "userName",
+                  "span": Span {
+                    "end": 123,
+                    "start": 115,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 123,
+                  "start": 114,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 124,
+                "start": 113,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 125,
+                "start": 124,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": " ",
+            },
+            Placeable {
+              "expression": SelectExpression {
+                "selector": VariableReference {
+                  "id": Identifier {
+                    "name": "photoCount",
+                    "span": Span {
+                      "end": 137,
+                      "start": 127,
+                      "type": "Span",
+                    },
+                    "type": "Identifier",
+                  },
+                  "span": Span {
+                    "end": 137,
+                    "start": 126,
+                    "type": "Span",
+                  },
+                  "type": "VariableReference",
+                },
+                "span": Span {
+                  "end": 224,
+                  "start": 126,
+                  "type": "Span",
+                },
+                "type": "SelectExpression",
+                "variants": Array [
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "one",
+                      "span": Span {
+                        "end": 153,
+                        "start": 150,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 172,
+                      "start": 149,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 172,
+                            "start": 155,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "added a new photo",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 172,
+                        "start": 155,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": true,
+                    "key": Identifier {
+                      "name": "other",
+                      "span": Span {
+                        "end": 187,
+                        "start": 182,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 219,
+                      "start": 180,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 195,
+                            "start": 189,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "added ",
+                        },
+                        Placeable {
+                          "expression": VariableReference {
+                            "id": Identifier {
+                              "name": "photoCount",
+                              "span": Span {
+                                "end": 207,
+                                "start": 197,
+                                "type": "Span",
+                              },
+                              "type": "Identifier",
+                            },
+                            "span": Span {
+                              "end": 207,
+                              "start": 196,
+                              "type": "Span",
+                            },
+                            "type": "VariableReference",
+                          },
+                          "span": Span {
+                            "end": 208,
+                            "start": 195,
+                            "type": "Span",
+                          },
+                          "type": "Placeable",
+                        },
+                        TextElement {
+                          "span": Span {
+                            "end": 219,
+                            "start": 208,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": " new photos",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 219,
+                        "start": 189,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                ],
+              },
+              "span": Span {
+                "end": 225,
+                "start": 125,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 229,
+                "start": 225,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": " to ",
+            },
+            Placeable {
+              "expression": SelectExpression {
+                "selector": VariableReference {
+                  "id": Identifier {
+                    "name": "userGender",
+                    "span": Span {
+                      "end": 241,
+                      "start": 231,
+                      "type": "Span",
+                    },
+                    "type": "Identifier",
+                  },
+                  "span": Span {
+                    "end": 241,
+                    "start": 230,
+                    "type": "Span",
+                  },
+                  "type": "VariableReference",
+                },
+                "span": Span {
+                  "end": 332,
+                  "start": 230,
+                  "type": "Span",
+                },
+                "type": "SelectExpression",
+                "variants": Array [
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "male",
+                      "span": Span {
+                        "end": 258,
+                        "start": 254,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 270,
+                      "start": 253,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 270,
+                            "start": 260,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "his stream",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 270,
+                        "start": 260,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "female",
+                      "span": Span {
+                        "end": 286,
+                        "start": 280,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 298,
+                      "start": 279,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 298,
+                            "start": 288,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "her stream",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 298,
+                        "start": 288,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": true,
+                    "key": Identifier {
+                      "name": "other",
+                      "span": Span {
+                        "end": 313,
+                        "start": 308,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 327,
+                      "start": 306,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 327,
+                            "start": 315,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "their stream",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 327,
+                        "start": 315,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                ],
+              },
+              "span": Span {
+                "end": 333,
+                "start": 229,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 334,
+                "start": 333,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": ".",
+            },
+          ],
+          "span": Span {
+            "end": 334,
+            "start": 109,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+    ],
+    "span": Span {
+      "end": 335,
+      "start": 0,
+      "type": "Span",
+    },
+    "type": "Resource",
+  },
+}
+`;
+
+exports[`projectfluent.org example 1: elm 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "Localization/App.elm",
+      "module Localization.App exposing (helloUser, name_, sharedPhotos)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Html as H
+import Html.Attributes as A
+import Json.Encode as E
+
+
+name_ : String -> H.Attribute msg
+name_ =
+    A.attribute \\"data-l10n-name\\"
+
+
+{-| Fluent message id \`hello-user\`, in file \`app.ftl\`
+
+    # Simple things are simple.
+    hello-user = Hello, {$userName}!
+
+-}
+helloUser : { userName : String } -> List (H.Attribute msg)
+helloUser args =
+    [ A.attribute \\"data-l10n-id\\" \\"hello-user\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"userName\\", E.string args.userName )
+                ]
+    ]
+
+
+{-| Fluent message id \`shared-photos\`, in file \`app.ftl\`
+
+    # Complex things are possible.
+    shared-photos =
+        {$userName} {$photoCount ->
+            [one] added a new photo
+           *[other] added {$photoCount} new photos
+        } to {$userGender ->
+            [male] his stream
+            [female] her stream
+           *[other] their stream
+        }.
+
+-}
+sharedPhotos : { userName : String, photoCount : String, userGender : String } -> List (H.Attribute msg)
+sharedPhotos args =
+    [ A.attribute \\"data-l10n-id\\" \\"shared-photos\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"userName\\", E.string args.userName )
+                , ( \\"photoCount\\", E.string args.photoCount )
+                , ( \\"userGender\\", E.string args.userGender )
+                ]
+    ]
+",
+    ],
+    Array [
+      "Localization.elm",
+      "module Localization exposing (app)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Localization.App
+
+
+app =
+    { helloUser = Localization.App.helloUser
+    , sharedPhotos = Localization.App.sharedPhotos
+    }
+",
+    ],
+  ],
+  "label": "elm",
+}
+`;
+
+exports[`projectfluent.org example 1: react 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.tsx",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import __React from \\"react\\";
+import * as __L from \\"@fluent/react\\";
+
+// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
+type __props = Omit<__L.LocalizedProps, \\"id\\" | \\"vars\\" | \\"attrs\\">;
+
+/** Fluent message id \`hello-user\`, in file \`app.ftl\`
+
+\`\`\`
+# Simple things are simple.
+hello-user = Hello, {$userName}!
+\`\`\`
+
+*/
+
+export function HelloUser(
+  props: __props & { vars: { userName: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"hello-user\\" {...props} />;
+}
+
+/** Fluent message id \`shared-photos\`, in file \`app.ftl\`
+
+\`\`\`
+# Complex things are possible.
+shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+\`\`\`
+
+*/
+
+export function SharedPhotos(
+  props: __props & {
+    vars: { userName: string; photoCount: string; userGender: string };
+  }
+): JSX.Element {
+  return <__L.Localized id=\\"shared-photos\\" {...props} />;
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react",
+}
+`;
+
+exports[`projectfluent.org example 1: react-dom 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+export function name_(name: string): { \\"data-l10n-name\\": string } {
+  return { \\"data-l10n-name\\": name };
+}
+
+/** Fluent message id \`hello-user\`, in file \`app.ftl\`
+
+\`\`\`
+# Simple things are simple.
+hello-user = Hello, {$userName}!
+\`\`\`
+
+*/
+
+export function helloUser(args: { userName: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"hello-user\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      userName: args.userName,
+    }),
+  };
+}
+
+/** Fluent message id \`shared-photos\`, in file \`app.ftl\`
+
+\`\`\`
+# Complex things are possible.
+shared-photos =
+    {$userName} {$photoCount ->
+        [one] added a new photo
+       *[other] added {$photoCount} new photos
+    } to {$userGender ->
+        [male] his stream
+        [female] her stream
+       *[other] their stream
+    }.
+\`\`\`
+
+*/
+
+export function sharedPhotos(args: {
+  userName: string;
+  photoCount: string;
+  userGender: string;
+}): { \\"data-l10n-id\\": string; \\"data-l10n-args\\": string } {
+  return {
+    \\"data-l10n-id\\": \\"shared-photos\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      userName: args.userName,
+      photoCount: args.photoCount,
+      userGender: args.userGender,
+    }),
+  };
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react-dom",
+}
+`;
+
+exports[`projectfluent.org example 2 1`] = `
+Object {
+  "messages": Array [
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-button",
+      "placeholders": Array [],
+      "raw": "tabs-close-button = Close",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-tooltip",
+      "placeholders": Array [
+        Object {
+          "name": "tabCount",
+          "type": "string",
+        },
+      ],
+      "raw": "tabs-close-tooltip = {$tabCount ->
+    [one] Close {$tabCount} tab
+   *[other] Close {$tabCount} tabs
+}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-warning",
+      "placeholders": Array [
+        Object {
+          "name": "tabCount",
+          "type": "string",
+        },
+      ],
+      "raw": "tabs-close-warning =
+    You are about to close {$tabCount} tabs.
+    Are you sure you want to continue?",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-dialog-title",
+      "placeholders": Array [],
+      "raw": "sync-dialog-title = {-sync-brand-name}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-headline-title",
+      "placeholders": Array [],
+      "raw": "sync-headline-title =
+    {-sync-brand-name}: The best way to bring
+    your data always with you",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-signedout-title",
+      "placeholders": Array [],
+      "raw": "sync-signedout-title =
+    Connect with your {-sync-brand-name}",
+    },
+  ],
+  "path": "app.ftl",
+  "raw": "## Closing tabs
+
+tabs-close-button = Close
+tabs-close-tooltip = {$tabCount ->
+    [one] Close {$tabCount} tab
+   *[other] Close {$tabCount} tabs
+}
+tabs-close-warning =
+    You are about to close {$tabCount} tabs.
+    Are you sure you want to continue?
+
+## Syncing
+
+-sync-brand-name = Firefox Account
+
+sync-dialog-title = {-sync-brand-name}
+sync-headline-title =
+    {-sync-brand-name}: The best way to bring
+    your data always with you
+sync-signedout-title =
+    Connect with your {-sync-brand-name}",
+  "resource": Resource {
+    "body": Array [
+      GroupComment {
+        "content": "Closing tabs",
+        "span": Span {
+          "end": 15,
+          "start": 0,
+          "type": "Span",
+        },
+        "type": "GroupComment",
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-button",
+          "span": Span {
+            "end": 34,
+            "start": 17,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 42,
+          "start": 17,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 42,
+                "start": 37,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Close",
+            },
+          ],
+          "span": Span {
+            "end": 42,
+            "start": 37,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-tooltip",
+          "span": Span {
+            "end": 61,
+            "start": 43,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 146,
+          "start": 43,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": SelectExpression {
+                "selector": VariableReference {
+                  "id": Identifier {
+                    "name": "tabCount",
+                    "span": Span {
+                      "end": 74,
+                      "start": 66,
+                      "type": "Span",
+                    },
+                    "type": "Identifier",
+                  },
+                  "span": Span {
+                    "end": 74,
+                    "start": 65,
+                    "type": "Span",
+                  },
+                  "type": "VariableReference",
+                },
+                "span": Span {
+                  "end": 145,
+                  "start": 65,
+                  "type": "Span",
+                },
+                "type": "SelectExpression",
+                "variants": Array [
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "one",
+                      "span": Span {
+                        "end": 86,
+                        "start": 83,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 109,
+                      "start": 82,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 94,
+                            "start": 88,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "Close ",
+                        },
+                        Placeable {
+                          "expression": VariableReference {
+                            "id": Identifier {
+                              "name": "tabCount",
+                              "span": Span {
+                                "end": 104,
+                                "start": 96,
+                                "type": "Span",
+                              },
+                              "type": "Identifier",
+                            },
+                            "span": Span {
+                              "end": 104,
+                              "start": 95,
+                              "type": "Span",
+                            },
+                            "type": "VariableReference",
+                          },
+                          "span": Span {
+                            "end": 105,
+                            "start": 94,
+                            "type": "Span",
+                          },
+                          "type": "Placeable",
+                        },
+                        TextElement {
+                          "span": Span {
+                            "end": 109,
+                            "start": 105,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": " tab",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 109,
+                        "start": 88,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": true,
+                    "key": Identifier {
+                      "name": "other",
+                      "span": Span {
+                        "end": 120,
+                        "start": 115,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 144,
+                      "start": 113,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 128,
+                            "start": 122,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "Close ",
+                        },
+                        Placeable {
+                          "expression": VariableReference {
+                            "id": Identifier {
+                              "name": "tabCount",
+                              "span": Span {
+                                "end": 138,
+                                "start": 130,
+                                "type": "Span",
+                              },
+                              "type": "Identifier",
+                            },
+                            "span": Span {
+                              "end": 138,
+                              "start": 129,
+                              "type": "Span",
+                            },
+                            "type": "VariableReference",
+                          },
+                          "span": Span {
+                            "end": 139,
+                            "start": 128,
+                            "type": "Span",
+                          },
+                          "type": "Placeable",
+                        },
+                        TextElement {
+                          "span": Span {
+                            "end": 144,
+                            "start": 139,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": " tabs",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 144,
+                        "start": 122,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                ],
+              },
+              "span": Span {
+                "end": 146,
+                "start": 64,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 146,
+            "start": 64,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-warning",
+          "span": Span {
+            "end": 165,
+            "start": 147,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 251,
+          "start": 147,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 195,
+                "start": 172,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "You are about to close ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "tabCount",
+                  "span": Span {
+                    "end": 205,
+                    "start": 197,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 205,
+                  "start": 196,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 206,
+                "start": 195,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 251,
+                "start": 206,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": " tabs.
+Are you sure you want to continue?",
+            },
+          ],
+          "span": Span {
+            "end": 251,
+            "start": 168,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      GroupComment {
+        "content": "Syncing",
+        "span": Span {
+          "end": 263,
+          "start": 253,
+          "type": "Span",
+        },
+        "type": "GroupComment",
+      },
+      Term {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-brand-name",
+          "span": Span {
+            "end": 281,
+            "start": 266,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 299,
+          "start": 265,
+          "type": "Span",
+        },
+        "type": "Term",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 299,
+                "start": 284,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Firefox Account",
+            },
+          ],
+          "span": Span {
+            "end": 299,
+            "start": 284,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-dialog-title",
+          "span": Span {
+            "end": 318,
+            "start": 301,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 339,
+          "start": 301,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": TermReference {
+                "arguments": null,
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 338,
+                    "start": 323,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 338,
+                  "start": 322,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 339,
+                "start": 321,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 339,
+            "start": 321,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-headline-title",
+          "span": Span {
+            "end": 359,
+            "start": 340,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 437,
+          "start": 340,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": TermReference {
+                "arguments": null,
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 383,
+                    "start": 368,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 383,
+                  "start": 367,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 384,
+                "start": 366,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 437,
+                "start": 384,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": ": The best way to bring
+your data always with you",
+            },
+          ],
+          "span": Span {
+            "end": 437,
+            "start": 362,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-signedout-title",
+          "span": Span {
+            "end": 458,
+            "start": 438,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 501,
+          "start": 438,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 483,
+                "start": 465,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Connect with your ",
+            },
+            Placeable {
+              "expression": TermReference {
+                "arguments": null,
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 500,
+                    "start": 485,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 500,
+                  "start": 484,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 501,
+                "start": 483,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 501,
+            "start": 461,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+    ],
+    "span": Span {
+      "end": 501,
+      "start": 0,
+      "type": "Span",
+    },
+    "type": "Resource",
+  },
+}
+`;
+
+exports[`projectfluent.org example 2 2`] = `
+Object {
+  "messages": Array [
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-button",
+      "placeholders": Array [],
+      "raw": "tabs-close-button = Chiudi",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-tooltip",
+      "placeholders": Array [
+        Object {
+          "name": "tabCount",
+          "type": "string",
+        },
+      ],
+      "raw": "tabs-close-tooltip = {$tabCount ->
+    [one] Chiudi {$tabCount} scheda
+   *[other] Chiudi {$tabCount} schede
+}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "tabs-close-warning",
+      "placeholders": Array [
+        Object {
+          "name": "tabCount",
+          "type": "string",
+        },
+      ],
+      "raw": "tabs-close-warning =
+    Verranno chiuse {$tabCount} schede. Proseguire?",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-dialog-title",
+      "placeholders": Array [],
+      "raw": "sync-dialog-title = {-sync-brand-name}",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-headline-title",
+      "placeholders": Array [],
+      "raw": "sync-headline-title =
+    {-sync-brand-name}: il modo migliore
+    per avere i tuoi dati sempre con te",
+    },
+    Object {
+      "attributes": Set {},
+      "id": "sync-signedout-title",
+      "placeholders": Array [],
+      "raw": "sync-signedout-title =
+    Connetti il tuo {-sync-brand-name(first: \\"lowercase\\")}",
+    },
+  ],
+  "path": "app.ftl",
+  "raw": "## Closing tabs
+
+tabs-close-button = Chiudi
+tabs-close-tooltip = {$tabCount ->
+    [one] Chiudi {$tabCount} scheda
+   *[other] Chiudi {$tabCount} schede
+}
+tabs-close-warning =
+    Verranno chiuse {$tabCount} schede. Proseguire?
+
+## Syncing
+
+-sync-brand-name = {$first ->
+   *[uppercase] Account Firefox
+    [lowercase] account Firefox
+}
+
+sync-dialog-title = {-sync-brand-name}
+sync-headline-title =
+    {-sync-brand-name}: il modo migliore
+    per avere i tuoi dati sempre con te
+sync-signedout-title =
+    Connetti il tuo {-sync-brand-name(first: \\"lowercase\\")}
+",
+  "resource": Resource {
+    "body": Array [
+      GroupComment {
+        "content": "Closing tabs",
+        "span": Span {
+          "end": 15,
+          "start": 0,
+          "type": "Span",
+        },
+        "type": "GroupComment",
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-button",
+          "span": Span {
+            "end": 34,
+            "start": 17,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 43,
+          "start": 17,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 43,
+                "start": 37,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Chiudi",
+            },
+          ],
+          "span": Span {
+            "end": 43,
+            "start": 37,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-tooltip",
+          "span": Span {
+            "end": 62,
+            "start": 44,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 154,
+          "start": 44,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": SelectExpression {
+                "selector": VariableReference {
+                  "id": Identifier {
+                    "name": "tabCount",
+                    "span": Span {
+                      "end": 75,
+                      "start": 67,
+                      "type": "Span",
+                    },
+                    "type": "Identifier",
+                  },
+                  "span": Span {
+                    "end": 75,
+                    "start": 66,
+                    "type": "Span",
+                  },
+                  "type": "VariableReference",
+                },
+                "span": Span {
+                  "end": 153,
+                  "start": 66,
+                  "type": "Span",
+                },
+                "type": "SelectExpression",
+                "variants": Array [
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "one",
+                      "span": Span {
+                        "end": 87,
+                        "start": 84,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 114,
+                      "start": 83,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 96,
+                            "start": 89,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "Chiudi ",
+                        },
+                        Placeable {
+                          "expression": VariableReference {
+                            "id": Identifier {
+                              "name": "tabCount",
+                              "span": Span {
+                                "end": 106,
+                                "start": 98,
+                                "type": "Span",
+                              },
+                              "type": "Identifier",
+                            },
+                            "span": Span {
+                              "end": 106,
+                              "start": 97,
+                              "type": "Span",
+                            },
+                            "type": "VariableReference",
+                          },
+                          "span": Span {
+                            "end": 107,
+                            "start": 96,
+                            "type": "Span",
+                          },
+                          "type": "Placeable",
+                        },
+                        TextElement {
+                          "span": Span {
+                            "end": 114,
+                            "start": 107,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": " scheda",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 114,
+                        "start": 89,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": true,
+                    "key": Identifier {
+                      "name": "other",
+                      "span": Span {
+                        "end": 125,
+                        "start": 120,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 152,
+                      "start": 118,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 134,
+                            "start": 127,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "Chiudi ",
+                        },
+                        Placeable {
+                          "expression": VariableReference {
+                            "id": Identifier {
+                              "name": "tabCount",
+                              "span": Span {
+                                "end": 144,
+                                "start": 136,
+                                "type": "Span",
+                              },
+                              "type": "Identifier",
+                            },
+                            "span": Span {
+                              "end": 144,
+                              "start": 135,
+                              "type": "Span",
+                            },
+                            "type": "VariableReference",
+                          },
+                          "span": Span {
+                            "end": 145,
+                            "start": 134,
+                            "type": "Span",
+                          },
+                          "type": "Placeable",
+                        },
+                        TextElement {
+                          "span": Span {
+                            "end": 152,
+                            "start": 145,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": " schede",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 152,
+                        "start": 127,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                ],
+              },
+              "span": Span {
+                "end": 154,
+                "start": 65,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 154,
+            "start": 65,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "tabs-close-warning",
+          "span": Span {
+            "end": 173,
+            "start": 155,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 227,
+          "start": 155,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 196,
+                "start": 180,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Verranno chiuse ",
+            },
+            Placeable {
+              "expression": VariableReference {
+                "id": Identifier {
+                  "name": "tabCount",
+                  "span": Span {
+                    "end": 206,
+                    "start": 198,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 206,
+                  "start": 197,
+                  "type": "Span",
+                },
+                "type": "VariableReference",
+              },
+              "span": Span {
+                "end": 207,
+                "start": 196,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 227,
+                "start": 207,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": " schede. Proseguire?",
+            },
+          ],
+          "span": Span {
+            "end": 227,
+            "start": 176,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      GroupComment {
+        "content": "Syncing",
+        "span": Span {
+          "end": 239,
+          "start": 229,
+          "type": "Span",
+        },
+        "type": "GroupComment",
+      },
+      Term {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-brand-name",
+          "span": Span {
+            "end": 257,
+            "start": 242,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 336,
+          "start": 241,
+          "type": "Span",
+        },
+        "type": "Term",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": SelectExpression {
+                "selector": VariableReference {
+                  "id": Identifier {
+                    "name": "first",
+                    "span": Span {
+                      "end": 267,
+                      "start": 262,
+                      "type": "Span",
+                    },
+                    "type": "Identifier",
+                  },
+                  "span": Span {
+                    "end": 267,
+                    "start": 261,
+                    "type": "Span",
+                  },
+                  "type": "VariableReference",
+                },
+                "span": Span {
+                  "end": 335,
+                  "start": 261,
+                  "type": "Span",
+                },
+                "type": "SelectExpression",
+                "variants": Array [
+                  Variant {
+                    "default": true,
+                    "key": Identifier {
+                      "name": "uppercase",
+                      "span": Span {
+                        "end": 285,
+                        "start": 276,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 302,
+                      "start": 274,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 302,
+                            "start": 287,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "Account Firefox",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 302,
+                        "start": 287,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                  Variant {
+                    "default": false,
+                    "key": Identifier {
+                      "name": "lowercase",
+                      "span": Span {
+                        "end": 317,
+                        "start": 308,
+                        "type": "Span",
+                      },
+                      "type": "Identifier",
+                    },
+                    "span": Span {
+                      "end": 334,
+                      "start": 307,
+                      "type": "Span",
+                    },
+                    "type": "Variant",
+                    "value": Pattern {
+                      "elements": Array [
+                        TextElement {
+                          "span": Span {
+                            "end": 334,
+                            "start": 319,
+                            "type": "Span",
+                          },
+                          "type": "TextElement",
+                          "value": "account Firefox",
+                        },
+                      ],
+                      "span": Span {
+                        "end": 334,
+                        "start": 319,
+                        "type": "Span",
+                      },
+                      "type": "Pattern",
+                    },
+                  },
+                ],
+              },
+              "span": Span {
+                "end": 336,
+                "start": 260,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 336,
+            "start": 260,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-dialog-title",
+          "span": Span {
+            "end": 355,
+            "start": 338,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 376,
+          "start": 338,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": TermReference {
+                "arguments": null,
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 375,
+                    "start": 360,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 375,
+                  "start": 359,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 376,
+                "start": 358,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 376,
+            "start": 358,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-headline-title",
+          "span": Span {
+            "end": 396,
+            "start": 377,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 479,
+          "start": 377,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            Placeable {
+              "expression": TermReference {
+                "arguments": null,
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 420,
+                    "start": 405,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 420,
+                  "start": 404,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 421,
+                "start": 403,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+            TextElement {
+              "span": Span {
+                "end": 479,
+                "start": 421,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": ": il modo migliore
+per avere i tuoi dati sempre con te",
+            },
+          ],
+          "span": Span {
+            "end": 479,
+            "start": 399,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+      Message {
+        "attributes": Array [],
+        "comment": null,
+        "id": Identifier {
+          "name": "sync-signedout-title",
+          "span": Span {
+            "end": 500,
+            "start": 480,
+            "type": "Span",
+          },
+          "type": "Identifier",
+        },
+        "span": Span {
+          "end": 561,
+          "start": 480,
+          "type": "Span",
+        },
+        "type": "Message",
+        "value": Pattern {
+          "elements": Array [
+            TextElement {
+              "span": Span {
+                "end": 523,
+                "start": 507,
+                "type": "Span",
+              },
+              "type": "TextElement",
+              "value": "Connetti il tuo ",
+            },
+            Placeable {
+              "expression": TermReference {
+                "arguments": CallArguments {
+                  "named": Array [
+                    NamedArgument {
+                      "name": Identifier {
+                        "name": "first",
+                        "span": Span {
+                          "end": 546,
+                          "start": 541,
+                          "type": "Span",
+                        },
+                        "type": "Identifier",
+                      },
+                      "span": Span {
+                        "end": 559,
+                        "start": 541,
+                        "type": "Span",
+                      },
+                      "type": "NamedArgument",
+                      "value": StringLiteral {
+                        "span": Span {
+                          "end": 559,
+                          "start": 548,
+                          "type": "Span",
+                        },
+                        "type": "StringLiteral",
+                        "value": "lowercase",
+                      },
+                    },
+                  ],
+                  "positional": Array [],
+                  "span": Span {
+                    "end": 560,
+                    "start": 540,
+                    "type": "Span",
+                  },
+                  "type": "CallArguments",
+                },
+                "attribute": null,
+                "id": Identifier {
+                  "name": "sync-brand-name",
+                  "span": Span {
+                    "end": 540,
+                    "start": 525,
+                    "type": "Span",
+                  },
+                  "type": "Identifier",
+                },
+                "span": Span {
+                  "end": 560,
+                  "start": 524,
+                  "type": "Span",
+                },
+                "type": "TermReference",
+              },
+              "span": Span {
+                "end": 561,
+                "start": 523,
+                "type": "Span",
+              },
+              "type": "Placeable",
+            },
+          ],
+          "span": Span {
+            "end": 561,
+            "start": 503,
+            "type": "Span",
+          },
+          "type": "Pattern",
+        },
+      },
+    ],
+    "span": Span {
+      "end": 562,
+      "start": 0,
+      "type": "Span",
+    },
+    "type": "Resource",
+  },
+}
+`;
+
+exports[`projectfluent.org example 2: elm 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "Localization/App.elm",
+      "module Localization.App exposing (name_, syncDialogTitle, syncHeadlineTitle, syncSignedoutTitle, tabsCloseButton, tabsCloseTooltip, tabsCloseWarning)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Html as H
+import Html.Attributes as A
+import Json.Encode as E
+
+
+name_ : String -> H.Attribute msg
+name_ =
+    A.attribute \\"data-l10n-name\\"
+
+
+{-| Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+    tabs-close-button = Close
+
+-}
+tabsCloseButton : H.Attribute msg
+tabsCloseButton =
+    A.attribute \\"data-l10n-id\\" \\"tabs-close-button\\"
+
+
+{-| Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+    tabs-close-tooltip = {$tabCount ->
+        [one] Close {$tabCount} tab
+       *[other] Close {$tabCount} tabs
+    }
+
+-}
+tabsCloseTooltip : { tabCount : String } -> List (H.Attribute msg)
+tabsCloseTooltip args =
+    [ A.attribute \\"data-l10n-id\\" \\"tabs-close-tooltip\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"tabCount\\", E.string args.tabCount )
+                ]
+    ]
+
+
+{-| Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+    tabs-close-warning =
+        You are about to close {$tabCount} tabs.
+        Are you sure you want to continue?
+
+-}
+tabsCloseWarning : { tabCount : String } -> List (H.Attribute msg)
+tabsCloseWarning args =
+    [ A.attribute \\"data-l10n-id\\" \\"tabs-close-warning\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"tabCount\\", E.string args.tabCount )
+                ]
+    ]
+
+
+{-| Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+    sync-dialog-title = {\\\\-sync-brand-name}
+
+-}
+syncDialogTitle : H.Attribute msg
+syncDialogTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-dialog-title\\"
+
+
+{-| Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+    sync-headline-title =
+        {\\\\-sync-brand-name}: The best way to bring
+        your data always with you
+
+-}
+syncHeadlineTitle : H.Attribute msg
+syncHeadlineTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-headline-title\\"
+
+
+{-| Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+    sync-signedout-title =
+        Connect with your {\\\\-sync-brand-name}
+
+-}
+syncSignedoutTitle : H.Attribute msg
+syncSignedoutTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-signedout-title\\"
+",
+    ],
+    Array [
+      "Localization.elm",
+      "module Localization exposing (app)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Localization.App
+
+
+app =
+    { tabsCloseButton = Localization.App.tabsCloseButton
+    , tabsCloseTooltip = Localization.App.tabsCloseTooltip
+    , tabsCloseWarning = Localization.App.tabsCloseWarning
+    , syncDialogTitle = Localization.App.syncDialogTitle
+    , syncHeadlineTitle = Localization.App.syncHeadlineTitle
+    , syncSignedoutTitle = Localization.App.syncSignedoutTitle
+    }
+",
+    ],
+  ],
+  "label": "elm",
+}
+`;
+
+exports[`projectfluent.org example 2: it:elm 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "Localization/App.elm",
+      "module Localization.App exposing (name_, syncDialogTitle, syncHeadlineTitle, syncSignedoutTitle, tabsCloseButton, tabsCloseTooltip, tabsCloseWarning)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Html as H
+import Html.Attributes as A
+import Json.Encode as E
+
+
+name_ : String -> H.Attribute msg
+name_ =
+    A.attribute \\"data-l10n-name\\"
+
+
+{-| Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+    tabs-close-button = Chiudi
+
+-}
+tabsCloseButton : H.Attribute msg
+tabsCloseButton =
+    A.attribute \\"data-l10n-id\\" \\"tabs-close-button\\"
+
+
+{-| Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+    tabs-close-tooltip = {$tabCount ->
+        [one] Chiudi {$tabCount} scheda
+       *[other] Chiudi {$tabCount} schede
+    }
+
+-}
+tabsCloseTooltip : { tabCount : String } -> List (H.Attribute msg)
+tabsCloseTooltip args =
+    [ A.attribute \\"data-l10n-id\\" \\"tabs-close-tooltip\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"tabCount\\", E.string args.tabCount )
+                ]
+    ]
+
+
+{-| Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+    tabs-close-warning =
+        Verranno chiuse {$tabCount} schede. Proseguire?
+
+-}
+tabsCloseWarning : { tabCount : String } -> List (H.Attribute msg)
+tabsCloseWarning args =
+    [ A.attribute \\"data-l10n-id\\" \\"tabs-close-warning\\"
+    , A.attribute \\"data-l10n-args\\" <|
+        E.encode 0 <|
+            E.object
+                [ ( \\"tabCount\\", E.string args.tabCount )
+                ]
+    ]
+
+
+{-| Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+    sync-dialog-title = {\\\\-sync-brand-name}
+
+-}
+syncDialogTitle : H.Attribute msg
+syncDialogTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-dialog-title\\"
+
+
+{-| Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+    sync-headline-title =
+        {\\\\-sync-brand-name}: il modo migliore
+        per avere i tuoi dati sempre con te
+
+-}
+syncHeadlineTitle : H.Attribute msg
+syncHeadlineTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-headline-title\\"
+
+
+{-| Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+    sync-signedout-title =
+        Connetti il tuo {\\\\-sync-brand-name(first: \\"lowercase\\")}
+
+-}
+syncSignedoutTitle : H.Attribute msg
+syncSignedoutTitle =
+    A.attribute \\"data-l10n-id\\" \\"sync-signedout-title\\"
+",
+    ],
+    Array [
+      "Localization.elm",
+      "module Localization exposing (app)
+
+{-| File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit!
+-}
+
+import Localization.App
+
+
+app =
+    { tabsCloseButton = Localization.App.tabsCloseButton
+    , tabsCloseTooltip = Localization.App.tabsCloseTooltip
+    , tabsCloseWarning = Localization.App.tabsCloseWarning
+    , syncDialogTitle = Localization.App.syncDialogTitle
+    , syncHeadlineTitle = Localization.App.syncHeadlineTitle
+    , syncSignedoutTitle = Localization.App.syncSignedoutTitle
+    }
+",
+    ],
+  ],
+  "label": "elm",
+}
+`;
+
+exports[`projectfluent.org example 2: it:react 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.tsx",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import __React from \\"react\\";
+import * as __L from \\"@fluent/react\\";
+
+// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
+type __props = Omit<__L.LocalizedProps, \\"id\\" | \\"vars\\" | \\"attrs\\">;
+
+/** Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-button = Chiudi
+\`\`\`
+
+*/
+
+export function TabsCloseButton(props: __props): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-button\\" {...props} />;
+}
+
+/** Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-tooltip = {$tabCount ->
+    [one] Chiudi {$tabCount} scheda
+   *[other] Chiudi {$tabCount} schede
+}
+\`\`\`
+
+*/
+
+export function TabsCloseTooltip(
+  props: __props & { vars: { tabCount: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-tooltip\\" {...props} />;
+}
+
+/** Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-warning =
+    Verranno chiuse {$tabCount} schede. Proseguire?
+\`\`\`
+
+*/
+
+export function TabsCloseWarning(
+  props: __props & { vars: { tabCount: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-warning\\" {...props} />;
+}
+
+/** Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-dialog-title = {-sync-brand-name}
+\`\`\`
+
+*/
+
+export function SyncDialogTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-dialog-title\\" {...props} />;
+}
+
+/** Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-headline-title =
+    {-sync-brand-name}: il modo migliore
+    per avere i tuoi dati sempre con te
+\`\`\`
+
+*/
+
+export function SyncHeadlineTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-headline-title\\" {...props} />;
+}
+
+/** Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-signedout-title =
+    Connetti il tuo {-sync-brand-name(first: \\"lowercase\\")}
+\`\`\`
+
+*/
+
+export function SyncSignedoutTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-signedout-title\\" {...props} />;
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react",
+}
+`;
+
+exports[`projectfluent.org example 2: it:react-dom 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+export function name_(name: string): { \\"data-l10n-name\\": string } {
+  return { \\"data-l10n-name\\": name };
+}
+
+/** Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-button = Chiudi
+\`\`\`
+
+*/
+
+export const tabsCloseButton: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"tabs-close-button\\",
+};
+
+/** Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-tooltip = {$tabCount ->
+    [one] Chiudi {$tabCount} scheda
+   *[other] Chiudi {$tabCount} schede
+}
+\`\`\`
+
+*/
+
+export function tabsCloseTooltip(args: { tabCount: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"tabs-close-tooltip\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      tabCount: args.tabCount,
+    }),
+  };
+}
+
+/** Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-warning =
+    Verranno chiuse {$tabCount} schede. Proseguire?
+\`\`\`
+
+*/
+
+export function tabsCloseWarning(args: { tabCount: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"tabs-close-warning\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      tabCount: args.tabCount,
+    }),
+  };
+}
+
+/** Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-dialog-title = {-sync-brand-name}
+\`\`\`
+
+*/
+
+export const syncDialogTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-dialog-title\\",
+};
+
+/** Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-headline-title =
+    {-sync-brand-name}: il modo migliore
+    per avere i tuoi dati sempre con te
+\`\`\`
+
+*/
+
+export const syncHeadlineTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-headline-title\\",
+};
+
+/** Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-signedout-title =
+    Connetti il tuo {-sync-brand-name(first: \\"lowercase\\")}
+\`\`\`
+
+*/
+
+export const syncSignedoutTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-signedout-title\\",
+};
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react-dom",
+}
+`;
+
+exports[`projectfluent.org example 2: react 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.tsx",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import __React from \\"react\\";
+import * as __L from \\"@fluent/react\\";
+
+// https://github.com/projectfluent/fluent.js/blob/master/fluent-react/src/localized.ts
+type __props = Omit<__L.LocalizedProps, \\"id\\" | \\"vars\\" | \\"attrs\\">;
+
+/** Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-button = Close
+\`\`\`
+
+*/
+
+export function TabsCloseButton(props: __props): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-button\\" {...props} />;
+}
+
+/** Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-tooltip = {$tabCount ->
+    [one] Close {$tabCount} tab
+   *[other] Close {$tabCount} tabs
+}
+\`\`\`
+
+*/
+
+export function TabsCloseTooltip(
+  props: __props & { vars: { tabCount: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-tooltip\\" {...props} />;
+}
+
+/** Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-warning =
+    You are about to close {$tabCount} tabs.
+    Are you sure you want to continue?
+\`\`\`
+
+*/
+
+export function TabsCloseWarning(
+  props: __props & { vars: { tabCount: string } }
+): JSX.Element {
+  return <__L.Localized id=\\"tabs-close-warning\\" {...props} />;
+}
+
+/** Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-dialog-title = {-sync-brand-name}
+\`\`\`
+
+*/
+
+export function SyncDialogTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-dialog-title\\" {...props} />;
+}
+
+/** Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-headline-title =
+    {-sync-brand-name}: The best way to bring
+    your data always with you
+\`\`\`
+
+*/
+
+export function SyncHeadlineTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-headline-title\\" {...props} />;
+}
+
+/** Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-signedout-title =
+    Connect with your {-sync-brand-name}
+\`\`\`
+
+*/
+
+export function SyncSignedoutTitle(props: __props): JSX.Element {
+  return <__L.Localized id=\\"sync-signedout-title\\" {...props} />;
+}
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react",
+}
+`;
+
+exports[`projectfluent.org example 2: react-dom 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      "localization/app.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+export function name_(name: string): { \\"data-l10n-name\\": string } {
+  return { \\"data-l10n-name\\": name };
+}
+
+/** Fluent message id \`tabs-close-button\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-button = Close
+\`\`\`
+
+*/
+
+export const tabsCloseButton: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"tabs-close-button\\",
+};
+
+/** Fluent message id \`tabs-close-tooltip\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-tooltip = {$tabCount ->
+    [one] Close {$tabCount} tab
+   *[other] Close {$tabCount} tabs
+}
+\`\`\`
+
+*/
+
+export function tabsCloseTooltip(args: { tabCount: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"tabs-close-tooltip\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      tabCount: args.tabCount,
+    }),
+  };
+}
+
+/** Fluent message id \`tabs-close-warning\`, in file \`app.ftl\`
+
+\`\`\`
+tabs-close-warning =
+    You are about to close {$tabCount} tabs.
+    Are you sure you want to continue?
+\`\`\`
+
+*/
+
+export function tabsCloseWarning(args: { tabCount: string }): {
+  \\"data-l10n-id\\": string;
+  \\"data-l10n-args\\": string;
+} {
+  return {
+    \\"data-l10n-id\\": \\"tabs-close-warning\\",
+    \\"data-l10n-args\\": JSON.stringify({
+      tabCount: args.tabCount,
+    }),
+  };
+}
+
+/** Fluent message id \`sync-dialog-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-dialog-title = {-sync-brand-name}
+\`\`\`
+
+*/
+
+export const syncDialogTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-dialog-title\\",
+};
+
+/** Fluent message id \`sync-headline-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-headline-title =
+    {-sync-brand-name}: The best way to bring
+    your data always with you
+\`\`\`
+
+*/
+
+export const syncHeadlineTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-headline-title\\",
+};
+
+/** Fluent message id \`sync-signedout-title\`, in file \`app.ftl\`
+
+\`\`\`
+sync-signedout-title =
+    Connect with your {-sync-brand-name}
+\`\`\`
+
+*/
+
+export const syncSignedoutTitle: { \\"data-l10n-id\\": string } = {
+  \\"data-l10n-id\\": \\"sync-signedout-title\\",
+};
+",
+    ],
+    Array [
+      "localization.ts",
+      "/** File auto-generated by \`@erosson/fluent-typesafe\`. Do not edit! */
+
+import * as localizationApp from \\"./localization/app\\";
+
+export const app = localizationApp;
+",
+    ],
+  ],
+  "label": "react-dom",
+}
+`;
+
 exports[`simple 1`] = `
 Object {
   "messages": Array [
@@ -64,7 +4149,7 @@ Object {
 }
 `;
 
-exports[`simple 2`] = `
+exports[`simple: elm 1`] = `
 Object {
   "calls": Array [
     Array [
@@ -114,7 +4199,7 @@ app =
 }
 `;
 
-exports[`simple 3`] = `
+exports[`simple: react 1`] = `
 Object {
   "calls": Array [
     Array [
@@ -155,7 +4240,7 @@ export const app = localizationApp;
 }
 `;
 
-exports[`simple 4`] = `
+exports[`simple: react-dom 1`] = `
 Object {
   "calls": Array [
     Array [
